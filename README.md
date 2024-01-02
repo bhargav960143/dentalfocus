@@ -43,11 +43,11 @@ Contributing
 ------------
 <p>This project exists thanks to all the people who contribute.</p>
 
-<p><a href="https://www.linkedin.com/in/bhargavpateldeveloper/" title="Bhargav Patel"><img src="https://media.licdn.com/dms/image/C5603AQGEq8eMvZ4Blw/profile-displayphoto-shrink_200_200/0?e=1554940800&amp;v=beta&amp;t=905km7WUqOuf3OEfDS9dq6P6vWVne_B8lg_2ZnbXCJo" width="50px" height="50px"></a>&nbsp;<a href="#" title="Tejas Darji"><img src="http://www.trentiums.com/images/laraking/tejas.png" width="50px" height="50px"></a></p>
+<p><a href="https://www.linkedin.com/in/bhargavpateldeveloper/" title="Bhargav Patel"><img src="https://qph.cf2.quoracdn.net/main-thumb-93061028-200-lybwqisvcybuomdhnrxnvgdisxlzlqma.jpeg" width="50px" height="50px"></a></p>
 
 Sponsors
 ------------
 <p>Support this project by becoming a sponsor. Your logo will show up here with a link to your website. </p>
 
-<a href="http://www.trentiums.com/" title="Trentium Solution"><img src="http://www.trentiums.com/images/logo@2x.png" height="100px" width="120px"></a>
+<a href="http://www.trentiums.com/" title="Trentium Solution"><img src="https://www.trentiums.com/front/theme/assets/img/logo/logo.png" height="100px" width="120px"></a>
 
