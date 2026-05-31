@@ -69,30 +69,30 @@ Overview of all modules — Form Builder, Submissions, Testimonials, Team, Treat
 
 ---
 
-### Form Builder — Field Palette & Canvas
+### Form Builder — Create New Form
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-2.png" alt="Form Builder — drag and drop" width="100%" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-2.png" alt="Form Builder — create form" width="100%" />
 </p>
 
-Drag field types from the left palette into the builder canvas. Reorder by dragging the handle.
+New form screen — enter a Form Name and optional Description, then drag field types from the left palette (Text, Email, Phone, Textarea, Dropdown, Checkboxes, Radio Buttons, Date) into the empty canvas. Hit **Save Form** when done.
 
 ---
 
-### Form Builder — Field Settings
+### Form Builder — Edit Form, Fields & Shortcode
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-3.png" alt="Field Settings Panel" width="100%" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-3.png" alt="Edit Form with shortcode and field settings" width="100%" />
 </p>
 
-Click the edit icon on any field to configure label, placeholder, options (for select/checkbox/radio), and required toggle.
+Edit view shows the auto-generated shortcode (`[dk_form id="1"]`) with a **Copy** button at the top. Fields appear in the canvas with drag handles for reordering. Click the pencil icon on any field to open the **Field Settings** panel — configure Label, Placeholder, and Required toggle.
 
 ---
 
-### Auto-Generated Shortcode
+### Form Builder — List View & Shortcodes
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-4.png" alt="Auto-generated shortcode" width="100%" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-4.png" alt="Form Builder list with shortcodes" width="100%" />
 </p>
 
-Every saved form displays its shortcode at the top. Click **Copy** to copy to clipboard instantly.
+All saved forms in one table — Name, field count, submission count, auto-generated shortcode, created date, and Edit/Delete actions.
 
 ---
 
@@ -114,12 +114,12 @@ Full submission data with field labels, values, timestamp, and IP address.
 
 ---
 
-### Settings — General & Social Media
+### Settings — General, Social Media & Help
 <p align="center">
   <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-7.png" alt="Settings panel" width="100%" />
 </p>
 
-Configure email notifications, reCAPTCHA v3 keys, and manage all social media links.
+Three tabs — **General**: email notification toggle, notification email address, reCAPTCHA v3 site/secret keys. **Social Media**: manage social links. **Help & Guide**: usage reference.
 
 ---
 
