@@ -109,6 +109,154 @@ Frontend form rendered by `[dk_form id="1"]`. Fully responsive, accessible, AJAX
 
 ---
 
+## How It Works
+
+### Form Builder — From Zero to Live Form in 4 Steps
+
+**Step 1 — Create a form**
+
+Go to **DentalKit → Form Builder → Add New Form**.
+Enter a form name (e.g. *Appointment Request*) and an optional description.
+
+```
+DentalKit
+ └── Form Builder
+      └── Add New Form  ← click here
+```
+
+---
+
+**Step 2 — Drag fields onto the canvas**
+
+The screen is split into two panels:
+
+```
+┌─────────────────────┬──────────────────────────────────┐
+│   FIELD PALETTE     │   BUILDER CANVAS                 │
+│                     │                                  │
+│  [Text Field]  ──drag──▶  [ Full Name (Text) ]   [✎][✕]│
+│  [Email Field]      │  [ Email Address (Email)] [✎][✕] │
+│  [Phone Field]      │  [ Message (Textarea) ]   [✎][✕] │
+│  [Textarea]         │                                  │
+│  [Dropdown]         │  ← drop more fields here         │
+│  [Checkboxes]       │                                  │
+│  [Radio Buttons]    │                                  │
+│  [Date Field]       │                                  │
+└─────────────────────┴──────────────────────────────────┘
+```
+
+- **Drag** any field type from the left palette into the canvas
+- **Reorder** fields by dragging the ≡ handle
+- **Edit** a field by clicking the pencil icon — set label, placeholder, required toggle
+- **Remove** a field with the trash icon
+
+---
+
+**Step 3 — Save → shortcode appears automatically**
+
+Click **Save Form**. DentalKit saves the form and instantly displays:
+
+```
+Shortcode:  [dk_form id="1"]   [Copy]
+```
+
+Click **Copy** — the shortcode is now in your clipboard. No manual setup needed.
+
+---
+
+**Step 4 — Paste shortcode into any page**
+
+Open any WordPress page or post. Paste `[dk_form id="1"]` into the content editor (Gutenberg Shortcode block, Classic editor, Elementor, Divi — anywhere).
+
+Publish the page. Your form is live.
+
+---
+
+### What Happens When a Visitor Submits the Form
+
+```
+Visitor fills form → clicks Submit
+        │
+        ▼
+DentalKit validates each field (required, email format, phone format)
+        │
+        ├─ Validation fails → inline error messages shown, no data sent
+        │
+        └─ Validation passes
+                │
+                ▼
+        Data saved to database (wp_dk_submissions table)
+                │
+                ├─ Email notification sent to admin (if enabled in Settings)
+                │
+                └─ Success message shown to visitor
+```
+
+---
+
+### Viewing & Exporting Submissions
+
+Go to **DentalKit → Submissions**.
+
+```
+DentalKit
+ └── Submissions
+      ├── Filter by form  [dropdown]
+      ├── [Export CSV]    ← downloads all submissions as .csv (Excel-ready)
+      │
+      └── Table rows
+           ├── ID | Form | Data Preview | IP | Date | [View] [Delete]
+           └── Click [View] to see full submission detail
+```
+
+The CSV file:
+- Opens correctly in Microsoft Excel (UTF-8 BOM included)
+- First row = column headers (field labels)
+- One row per submission
+
+---
+
+### Displaying Post Types (Testimonials, Team, etc.)
+
+1. Go to **Testimonials / Team / Treatments / Portfolio / Banners** in the WP sidebar
+2. Add your content (title, featured image, description)
+3. Use a shortcode to display it anywhere:
+
+```
+[dk_testimonials columns="3" limit="6"]
+[dk_team columns="4"]
+[dk_treatments columns="3" category="cosmetic"]
+[dk_portfolio columns="4" limit="12"]
+[dk_banners]
+```
+
+All shortcodes support:
+
+| Attribute | Default | Description |
+|-----------|---------|-------------|
+| `limit` | `10` | Number of items to show |
+| `columns` | varies | Grid columns (1–6) |
+| `category` | — | Filter by category slug |
+| `orderby` | `date` | Sort by: `date`, `title`, `menu_order` |
+| `order` | `DESC` | `ASC` or `DESC` |
+
+---
+
+### Social Media Links
+
+1. Go to **DentalKit → Settings → Social Media tab**
+2. Click **Add New** — enter title (e.g. *Facebook*) and URL
+3. The slug is auto-generated (e.g. `facebook`)
+4. Use in templates:
+
+```
+[dk_social name="facebook"]           → <a href="...">Facebook</a>
+[dk_social name="instagram"]          → <a href="...">Instagram</a>
+[dk_social_list]                      → <ul> of all social links
+```
+
+---
+
 ## Requirements
 
 | Requirement | Minimum |
