@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 abstract class AbstractField implements FieldInterface {
 
@@ -9,8 +9,8 @@ abstract class AbstractField implements FieldInterface {
 		if ( ! empty( $field['required'] ) && ( '' === $value || null === $value ) ) {
 			return sprintf(
 				/* translators: %s: field label */
-				__( '%s is required.', 'dentalkit' ),
-				esc_html( $field['label'] ?? __( 'This field', 'dentalkit' ) )
+				__( '%s is required.', 'DentalFocus' ),
+				esc_html( $field['label'] ?? __( 'This field', 'DentalFocus' ) )
 			);
 		}
 		return true;

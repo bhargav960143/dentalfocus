@@ -4,42 +4,42 @@ declare(strict_types=1);
 if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <div class="wrap">
-	<h1 class="wp-heading-inline"><?php esc_html_e( 'Form Builder', 'dentalkit' ); ?></h1>
+	<h1 class="wp-heading-inline"><?php esc_html_e( 'Form Builder', 'DentalFocus' ); ?></h1>
 	<a href="<?php echo esc_url( admin_url( 'admin.php?page=dk-forms&action=create' ) ); ?>" class="page-title-action">
-		<?php esc_html_e( 'Add New Form', 'dentalkit' ); ?>
+		<?php esc_html_e( 'Add New Form', 'DentalFocus' ); ?>
 	</a>
 	<hr class="wp-header-end">
 
 	<?php if ( isset( $_GET['deleted'] ) ) : ?>
 	<div class="notice notice-success is-dismissible">
-		<p><?php esc_html_e( 'Form deleted successfully.', 'dentalkit' ); ?></p>
+		<p><?php esc_html_e( 'Form deleted successfully.', 'DentalFocus' ); ?></p>
 	</div>
 	<?php endif; ?>
 
 	<?php if ( empty( $forms ) ) : ?>
 	<div class="dk-empty-state">
 		<span class="dashicons dashicons-feedback dk-empty-icon"></span>
-		<h2><?php esc_html_e( 'No forms yet', 'dentalkit' ); ?></h2>
-		<p><?php esc_html_e( 'Create your first drag-and-drop form to start capturing patient enquiries.', 'dentalkit' ); ?></p>
+		<h2><?php esc_html_e( 'No forms yet', 'DentalFocus' ); ?></h2>
+		<p><?php esc_html_e( 'Create your first drag-and-drop form to start capturing patient enquiries.', 'DentalFocus' ); ?></p>
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=dk-forms&action=create' ) ); ?>" class="button button-primary button-hero">
-			<?php esc_html_e( 'Create Your First Form', 'dentalkit' ); ?>
+			<?php esc_html_e( 'Create Your First Form', 'DentalFocus' ); ?>
 		</a>
 	</div>
 	<?php else : ?>
 
 	<?php
-	$sub_repo = new DentalKit\FormBuilder\SubmissionRepository();
+	$sub_repo = new DentalFocus\FormBuilder\SubmissionRepository();
 	?>
 
 	<table class="wp-list-table widefat fixed striped dk-forms-table">
 		<thead>
 			<tr>
-				<th><?php esc_html_e( 'Form Name', 'dentalkit' ); ?></th>
-				<th><?php esc_html_e( 'Fields', 'dentalkit' ); ?></th>
-				<th><?php esc_html_e( 'Submissions', 'dentalkit' ); ?></th>
-				<th><?php esc_html_e( 'Shortcode', 'dentalkit' ); ?></th>
-				<th><?php esc_html_e( 'Created', 'dentalkit' ); ?></th>
-				<th><?php esc_html_e( 'Actions', 'dentalkit' ); ?></th>
+				<th><?php esc_html_e( 'Form Name', 'DentalFocus' ); ?></th>
+				<th><?php esc_html_e( 'Fields', 'DentalFocus' ); ?></th>
+				<th><?php esc_html_e( 'Submissions', 'DentalFocus' ); ?></th>
+				<th><?php esc_html_e( 'Shortcode', 'DentalFocus' ); ?></th>
+				<th><?php esc_html_e( 'Created', 'DentalFocus' ); ?></th>
+				<th><?php esc_html_e( 'Actions', 'DentalFocus' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -67,18 +67,18 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<a href="<?php echo esc_url( $subs_url ); ?>"><?php echo esc_html( $sub_count ); ?></a>
 				</td>
 				<td>
-					<code class="dk-shortcode-cell" title="<?php esc_attr_e( 'Click to copy', 'dentalkit' ); ?>">
+					<code class="dk-shortcode-cell" title="<?php esc_attr_e( 'Click to copy', 'DentalFocus' ); ?>">
 						<?php echo esc_html( $shortcode ); ?>
 					</code>
 				</td>
 				<td><?php echo esc_html( wp_date( get_option( 'date_format' ), strtotime( $form['created_at'] . ' UTC' ) ) ); ?></td>
 				<td>
 					<a href="<?php echo esc_url( $edit_url ); ?>" class="button button-small">
-						<?php esc_html_e( 'Edit', 'dentalkit' ); ?>
+						<?php esc_html_e( 'Edit', 'DentalFocus' ); ?>
 					</a>
 					<a href="<?php echo esc_url( $delete_url ); ?>" class="button button-small dk-btn-danger"
-					   onclick="return confirm('<?php echo esc_js( __( 'Delete this form and all its submissions? This cannot be undone.', 'dentalkit' ) ); ?>')">
-						<?php esc_html_e( 'Delete', 'dentalkit' ); ?>
+					   onclick="return confirm('<?php echo esc_js( __( 'Delete this form and all its submissions? This cannot be undone.', 'DentalFocus' ) ); ?>')">
+						<?php esc_html_e( 'Delete', 'DentalFocus' ); ?>
 					</a>
 				</td>
 			</tr>

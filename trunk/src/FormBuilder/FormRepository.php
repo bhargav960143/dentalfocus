@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder;
+namespace DentalFocus\FormBuilder;
 
 class FormRepository {
 

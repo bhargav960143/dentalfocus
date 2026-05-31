@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\Export;
+namespace DentalFocus\Export;
 
 class CsvExporter {
 
@@ -23,7 +23,7 @@ class CsvExporter {
 		fwrite( $out, "\xEF\xBB\xBF" );
 
 		if ( empty( $submissions ) ) {
-			fputcsv( $out, [ __( 'No submissions found.', 'dentalkit' ) ] );
+			fputcsv( $out, [ __( 'No submissions found.', 'DentalFocus' ) ] );
 			fclose( $out );
 			return;
 		}
@@ -38,13 +38,21 @@ class CsvExporter {
 			foreach ( array_keys( $headers ) as $field_id ) {
 				$item  = $data[ $field_id ] ?? null;
 				$value = $item['value'] ?? '';
-				$row[] = is_array( $value ) ? implode( ', ', $value ) : $value;
+				$value = is_array( $value ) ? implode( ', ', $value ) : (string) $value;
+				$row[] = $this->sanitize_csv_value( $value );
 			}
 
 			fputcsv( $out, $row );
 		}
 
 		fclose( $out );
+	}
+
+	private function sanitize_csv_value( string $value ): string {
+		if ( $value !== '' && in_array( $value[0], [ '=', '+', '-', '@', "\t", "\r" ], true ) ) {
+			return "\t" . $value;
+		}
+		return $value;
 	}
 
 	/** @return array<string, string> field_id => label */

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 class FieldRegistry {
 

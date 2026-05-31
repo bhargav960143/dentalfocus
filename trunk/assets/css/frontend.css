@@ -1,4 +1,230 @@
-/* DentalKit Frontend Form Styles v2.0.0 */
+﻿/* DentalFocus Frontend Form Styles v2.1.0 */
+
+/* ── Click-to-Call ──────────────────────────── */
+.dk-call-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: #e53935;
+	color: #fff;
+	padding: 12px 24px;
+	border-radius: 6px;
+	font-size: 15px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: background 0.2s ease;
+}
+.dk-call-btn:hover { background: #c62828; color: #fff; text-decoration: none; }
+.dk-call-link { color: #e53935; text-decoration: underline; }
+
+/* ── Opening Hours ──────────────────────────── */
+.dk-opening-hours { margin: 16px 0; }
+.dk-hours-table { width: 100%; border-collapse: collapse; }
+.dk-hours-table td, .dk-hours-list li { padding: 6px 12px; }
+.dk-hours-table tr:nth-child(even) { background: #f9f9f9; }
+.dk-hours-list { list-style: none; margin: 0; padding: 0; }
+.dk-hours-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
+.dk-hours-today .dk-hours-day, .dk-hours-today td { font-weight: 700; color: #1a73e8; }
+.dk-hours-day { font-weight: 500; }
+
+/* ── Team Social Links ──────────────────────── */
+.dk-team-socials { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+.dk-team-social-link { font-size: 12px; padding: 3px 8px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #555; }
+.dk-team-social-link:hover { background: #f5f5f5; }
+
+/* ── Google Map ─────────────────────────────── */
+.dk-map-wrap { margin: 16px 0; line-height: 0; }
+
+/* ── Before / After Slider ──────────────────── */
+.dk-ba-slider {
+	position: relative;
+	overflow: hidden;
+	cursor: col-resize;
+	-webkit-user-select: none;
+	user-select: none;
+	border-radius: 8px;
+	margin: 16px 0;
+	line-height: 0;
+}
+.dk-ba-after-img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.dk-ba-before-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	overflow: hidden;
+}
+.dk-ba-before-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: auto;
+	max-width: none;
+}
+.dk-ba-handle {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 2px;
+	background: #fff;
+	transform: translateX(-50%);
+	box-shadow: 0 0 6px rgba(0,0,0,.4);
+	z-index: 10;
+	cursor: col-resize;
+}
+.dk-ba-btn {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 44px;
+	height: 44px;
+	background: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0,0,0,.3);
+	font-size: 18px;
+	color: #333;
+	line-height: 1;
+}
+.dk-ba-label {
+	position: absolute;
+	bottom: 12px;
+	background: rgba(0,0,0,.55);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 4px;
+	pointer-events: none;
+	line-height: 1.4;
+}
+.dk-ba-label--before { left: 12px; }
+.dk-ba-label--after  { right: 12px; }
+
+/* ── Treatment Price ────────────────────────── */
+.dk-treatment-price {
+	display: flex;
+	align-items: baseline;
+	gap: 6px;
+	margin: 10px 0;
+}
+.dk-price-value {
+	font-size: 20px;
+	font-weight: 700;
+	color: #1a73e8;
+	line-height: 1;
+}
+.dk-price-note {
+	font-size: 12px;
+	color: #888;
+}
+
+/* ── WhatsApp ───────────────────────────────── */
+.dk-whatsapp-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: #25d366;
+	color: #fff;
+	padding: 12px 24px;
+	border-radius: 6px;
+	font-size: 15px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: background 0.2s ease;
+}
+.dk-whatsapp-btn::before {
+	content: '';
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z'/%3E%3Cpath d='M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.522 5.855L0 24l6.29-1.49A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.673-.524-5.189-1.432l-.371-.22-3.733.884.931-3.636-.242-.381A9.946 9.946 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z'/%3E%3C/svg%3E");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.dk-whatsapp-btn:hover {
+	background: #1ebe57;
+	color: #fff;
+	text-decoration: none;
+}
+.dk-whatsapp-link {
+	color: #25d366;
+	text-decoration: underline;
+}
+.dk-whatsapp-link:hover {
+	color: #1ebe57;
+}
+
+/* ── Treatment Enquiry Field ────────────────── */
+.dk-treatment-name-field {
+	background: #f0f7ff;
+	border: 1px solid #c8e0ff;
+	border-radius: 6px;
+	padding: 10px 14px;
+	margin-bottom: 16px;
+}
+.dk-treatment-name-field .dk-label {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #888;
+	margin-bottom: 2px;
+}
+.dk-treatment-name-value {
+	font-weight: 600;
+	color: #1a73e8;
+	font-size: 15px;
+}
+
+/* ── GDPR Consent ───────────────────────────── */
+.dk-gdpr-field {
+	border-top: 1px solid #e0e0e0;
+	padding-top: 16px;
+	margin-top: 4px;
+}
+.dk-gdpr-label {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	font-size: 13px;
+	color: #555;
+	cursor: pointer;
+	line-height: 1.5;
+}
+.dk-gdpr-label input[type="checkbox"] {
+	margin-top: 2px;
+	flex-shrink: 0;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+.dk-gdpr-label a {
+	color: #0073aa;
+	text-decoration: underline;
+}
+
+/* ── Star Ratings ───────────────────────────── */
+.dk-star-rating {
+	display: flex;
+	gap: 2px;
+	margin-bottom: 8px;
+	font-size: 20px;
+	line-height: 1;
+}
+.dk-star--filled {
+	color: #f5a623;
+}
+.dk-star--empty {
+	color: #d0d0d0;
+}
 
 .dk-form-wrap {
 	max-width: 680px;

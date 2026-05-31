@@ -1,4 +1,29 @@
-/* DentalKit Admin Styles v2.0.0 */
+﻿/* DentalFocus Admin Styles v2.1.0 */
+
+/* ── Testimonial Star Rating Meta Box ────────── */
+.dk-rating-picker {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 4px 0;
+}
+.dk-rating-label {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+	font-size: 16px;
+	color: #f5a623;
+	line-height: 1;
+}
+.dk-rating-label--none {
+	font-size: 13px;
+	color: #888;
+}
+.dk-rating-label input[type="radio"] {
+	margin: 0;
+	cursor: pointer;
+}
 
 /* ── Dashboard ─────────────────────────────── */
 .dk-dashboard .dk-version {

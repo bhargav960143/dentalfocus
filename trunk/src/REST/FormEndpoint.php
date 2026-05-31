@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\REST;
+namespace DentalFocus\REST;
 
-use DentalKit\FormBuilder\FormRepository;
-use DentalKit\FormBuilder\SubmissionRepository;
+use DentalFocus\FormBuilder\FormRepository;
+use DentalFocus\FormBuilder\SubmissionRepository;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_Error;
 
 class FormEndpoint {
 
-	private const NS = 'dentalkit/v1';
+	private const NS = 'DentalFocus/v1';
 
 	public function register_routes(): void {
 		register_rest_route( self::NS, '/forms', [
@@ -50,7 +50,7 @@ class FormEndpoint {
 
 	public function admin_only(): bool|WP_Error {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			return new WP_Error( 'forbidden', __( 'Insufficient permissions.', 'dentalkit' ), [ 'status' => 403 ] );
+			return new WP_Error( 'forbidden', __( 'Insufficient permissions.', 'DentalFocus' ), [ 'status' => 403 ] );
 		}
 		return true;
 	}
@@ -73,7 +73,7 @@ class FormEndpoint {
 		$form = $repo->find_with_fields( (int) $request->get_param( 'id' ) );
 
 		if ( ! $form ) {
-			return new WP_Error( 'not_found', __( 'Form not found.', 'dentalkit' ), [ 'status' => 404 ] );
+			return new WP_Error( 'not_found', __( 'Form not found.', 'DentalFocus' ), [ 'status' => 404 ] );
 		}
 
 		unset( $form['fields_json'] );
@@ -99,7 +99,7 @@ class FormEndpoint {
 		$repo = new FormRepository();
 
 		if ( ! $repo->find( $id ) ) {
-			return new WP_Error( 'not_found', __( 'Form not found.', 'dentalkit' ), [ 'status' => 404 ] );
+			return new WP_Error( 'not_found', __( 'Form not found.', 'DentalFocus' ), [ 'status' => 404 ] );
 		}
 
 		$repo->update(
@@ -120,7 +120,7 @@ class FormEndpoint {
 		$repo = new FormRepository();
 
 		if ( ! $repo->find( $id ) ) {
-			return new WP_Error( 'not_found', __( 'Form not found.', 'dentalkit' ), [ 'status' => 404 ] );
+			return new WP_Error( 'not_found', __( 'Form not found.', 'DentalFocus' ), [ 'status' => 404 ] );
 		}
 
 		$repo->delete( $id );

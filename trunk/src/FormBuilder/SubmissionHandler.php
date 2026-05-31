@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder;
+namespace DentalFocus\FormBuilder;
 
-use DentalKit\FormBuilder\Fields\FieldRegistry;
+use DentalFocus\FormBuilder\Fields\FieldRegistry;
 
 class SubmissionHandler {
 
@@ -11,21 +11,38 @@ class SubmissionHandler {
 		$form_id = absint( $_POST['form_id'] ?? 0 );
 
 		if ( ! $form_id ) {
-			wp_send_json_error( [ 'message' => __( 'Invalid form.', 'dentalkit' ) ], 400 );
+			wp_send_json_error( [ 'message' => __( 'Invalid form.', 'DentalFocus' ) ], 400 );
 		}
 
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ?? '' ) ), 'dk_submit_' . $form_id ) ) {
-			wp_send_json_error( [ 'message' => __( 'Security check failed.', 'dentalkit' ) ], 403 );
+			wp_send_json_error( [ 'message' => __( 'Security check failed.', 'DentalFocus' ) ], 403 );
 		}
 
 		$repo = new FormRepository();
 		$form = $repo->find_with_fields( $form_id );
 
 		if ( ! $form || 'active' !== $form['status'] ) {
-			wp_send_json_error( [ 'message' => __( 'Form not found.', 'dentalkit' ) ], 404 );
+			wp_send_json_error( [ 'message' => __( 'Form not found.', 'DentalFocus' ) ], 404 );
+		}
+
+		if ( ! empty( $_POST['dk_hp_field'] ) ) {
+			wp_send_json_error( [ 'message' => __( 'Spam detected.', 'DentalFocus' ) ], 400 );
+		}
+
+		$settings = get_option( 'dk_settings', [] );
+		if ( ! empty( $settings['gdpr_enabled'] ) ) {
+			$consent = (array) ( $_POST['dk_fields']['dk_gdpr_consent'] ?? [] );
+			if ( ! in_array( '1', $consent, true ) ) {
+				wp_send_json_error( [
+					'errors' => [ 'dk_gdpr_consent' => __( 'You must accept the privacy policy to continue.', 'DentalFocus' ) ],
+				], 422 );
+			}
 		}
 
 		$raw_fields = (array) ( $_POST['dk_fields'] ?? [] );
+		unset( $raw_fields['dk_gdpr_consent'] );
+
+		$treatment_name = sanitize_text_field( wp_unslash( $_POST['dk_treatment_enquiry_name'] ?? '' ) );
 		$data       = [];
 		$errors     = [];
 
@@ -56,9 +73,16 @@ class SubmissionHandler {
 			wp_send_json_error( [ 'errors' => $errors ], 422 );
 		}
 
+		if ( $treatment_name ) {
+			$data = array_merge(
+				[ '_treatment' => [ 'label' => __( 'Treatment Enquiry', 'DentalFocus' ), 'value' => $treatment_name ] ],
+				$data
+			);
+		}
+
 		$user_agent = sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ?? '' ) );
-		if ( strlen( $user_agent ) > 512 ) {
-			$user_agent = substr( $user_agent, 0, 512 );
+		if ( mb_strlen( $user_agent ) > 512 ) {
+			$user_agent = mb_substr( $user_agent, 0, 512 );
 		}
 
 		$submission_repo = new SubmissionRepository();
@@ -70,9 +94,11 @@ class SubmissionHandler {
 		);
 
 		$this->maybe_send_notification( $form, $data );
+		$this->maybe_send_patient_confirmation( $form, $data );
 
+		$confirmation = sanitize_text_field( $form['confirmation_message'] ?? '' );
 		wp_send_json_success( [
-			'message'       => __( 'Thank you! Your message has been sent.', 'dentalkit' ),
+			'message'       => $confirmation ?: __( 'Thank you! Your message has been sent.', 'DentalFocus' ),
 			'submission_id' => $submission_id,
 		] );
 	}
@@ -125,7 +151,7 @@ class SubmissionHandler {
 		$to      = sanitize_email( $settings['notification_email'] ?? get_option( 'admin_email' ) );
 		$subject = sprintf(
 			/* translators: %s: form name */
-			__( 'New submission: %s', 'dentalkit' ),
+			__( 'New submission: %s', 'DentalFocus' ),
 			$form['name']
 		);
 
@@ -136,5 +162,46 @@ class SubmissionHandler {
 		}
 
 		wp_mail( $to, $subject, $body );
+	}
+
+	private function maybe_send_patient_confirmation( array $form, array $data ): void {
+		$settings = get_option( 'dk_settings', [] );
+
+		if ( empty( $settings['patient_confirmation'] ) ) {
+			return;
+		}
+
+		$patient_email = '';
+		foreach ( $data as $item ) {
+			if ( is_string( $item['value'] ) && is_email( $item['value'] ) ) {
+				$patient_email = $item['value'];
+				break;
+			}
+		}
+
+		if ( ! $patient_email ) {
+			return;
+		}
+
+		$subject = sanitize_text_field(
+			$settings['confirmation_subject'] ?? sprintf( __( 'Thank you for contacting us — %s', 'DentalFocus' ), get_bloginfo( 'name' ) )
+		);
+
+		$body = wp_kses_post(
+			$settings['confirmation_body'] ?? sprintf(
+				__( "Dear Patient,\n\nThank you for getting in touch. We have received your enquiry and will get back to you shortly.\n\nPractice: %s", 'DentalFocus' ),
+				get_bloginfo( 'name' )
+			)
+		);
+
+		$from_name  = sanitize_text_field( $settings['confirmation_from_name']  ?? get_bloginfo( 'name' ) );
+		$from_email = sanitize_email( $settings['confirmation_from_email'] ?? get_option( 'admin_email' ) );
+
+		$headers = [
+			'Content-Type: text/plain; charset=UTF-8',
+			'From: ' . $from_name . ' <' . $from_email . '>',
+		];
+
+		wp_mail( $patient_email, $subject, $body, $headers );
 	}
 }

@@ -1,4 +1,4 @@
-/* DentalKit Frontend Form — v2.0.0 */
+﻿/* DentalFocus Frontend Form — v2.0.0 */
 /* global jQuery, DKForm */
 
 ( function ( $ ) {

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 class RadioField extends AbstractField {
 
 	public function get_type(): string  { return 'radio'; }
-	public function get_label(): string { return __( 'Radio Buttons', 'dentalkit' ); }
+	public function get_label(): string { return __( 'Radio Buttons', 'DentalFocus' ); }
 	public function get_icon(): string  { return 'dashicons-marker'; }
 
 	public function render( array $field, mixed $value = null ): string {

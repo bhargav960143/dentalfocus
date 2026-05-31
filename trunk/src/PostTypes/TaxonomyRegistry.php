@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\PostTypes;
+namespace DentalFocus\PostTypes;
 
 class TaxonomyRegistry {
 
@@ -34,12 +34,12 @@ class TaxonomyRegistry {
 		return [
 			'name'              => $plural,
 			'singular_name'     => $singular,
-			'search_items'      => sprintf( __( 'Search %s', 'dentalkit' ), $plural ),
-			'all_items'         => sprintf( __( 'All %s', 'dentalkit' ), $plural ),
-			'edit_item'         => sprintf( __( 'Edit %s', 'dentalkit' ), $singular ),
-			'update_item'       => sprintf( __( 'Update %s', 'dentalkit' ), $singular ),
-			'add_new_item'      => sprintf( __( 'Add New %s', 'dentalkit' ), $singular ),
-			'new_item_name'     => sprintf( __( 'New %s Name', 'dentalkit' ), $singular ),
+			'search_items'      => sprintf( __( 'Search %s', 'DentalFocus' ), $plural ),
+			'all_items'         => sprintf( __( 'All %s', 'DentalFocus' ), $plural ),
+			'edit_item'         => sprintf( __( 'Edit %s', 'DentalFocus' ), $singular ),
+			'update_item'       => sprintf( __( 'Update %s', 'DentalFocus' ), $singular ),
+			'add_new_item'      => sprintf( __( 'Add New %s', 'DentalFocus' ), $singular ),
+			'new_item_name'     => sprintf( __( 'New %s Name', 'DentalFocus' ), $singular ),
 			'menu_name'         => $plural,
 		];
 	}

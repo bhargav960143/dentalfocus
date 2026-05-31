@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 class DateField extends AbstractField {
 
 	public function get_type(): string  { return 'date'; }
-	public function get_label(): string { return __( 'Date Field', 'dentalkit' ); }
+	public function get_label(): string { return __( 'Date Field', 'DentalFocus' ); }
 	public function get_icon(): string  { return 'dashicons-calendar-alt'; }
 
 	public function render( array $field, mixed $value = null ): string {
@@ -36,7 +36,7 @@ class DateField extends AbstractField {
 			return $base;
 		}
 		if ( '' !== $value && ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', (string) $value ) ) {
-			return __( 'Please enter a valid date.', 'dentalkit' );
+			return __( 'Please enter a valid date.', 'DentalFocus' );
 		}
 		return true;
 	}

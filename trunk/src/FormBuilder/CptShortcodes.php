@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder;
+namespace DentalFocus\FormBuilder;
 
 class CptShortcodes {
 
@@ -89,20 +89,60 @@ class CptShortcodes {
 			</div>
 			<?php endif; ?>
 			<div class="dk-cpt-content">
-				<?php if ( 'testimonial' === $type ) : ?>
+				<?php if ( 'testimonial' === $type ) :
+				$rating = absint( get_post_meta( get_the_ID(), '_dk_rating', true ) );
+				?>
+				<?php if ( $rating > 0 ) : ?>
+				<div class="dk-star-rating" aria-label="<?php echo esc_attr( sprintf( __( '%d out of 5 stars', 'dentalfocus' ), $rating ) ); ?>">
+					<?php
+					for ( $i = 1; $i <= 5; $i++ ) {
+						echo '<span class="dk-star ' . ( $i <= $rating ? 'dk-star--filled' : 'dk-star--empty' ) . '">★</span>';
+					}
+					?>
+				</div>
+				<?php endif; ?>
 				<div class="dk-testimonial-quote">
 					<?php the_content(); ?>
 				</div>
 				<p class="dk-testimonial-author">&mdash; <?php echo esc_html( $title ); ?></p>
-				<?php else : ?>
+				<?php else :
+				$price      = sanitize_text_field( get_post_meta( get_the_ID(), '_dk_price',      true ) );
+				$price_note = sanitize_text_field( get_post_meta( get_the_ID(), '_dk_price_note', true ) );
+				?>
 				<h3 class="dk-cpt-title">
 					<a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $title ); ?></a>
 				</h3>
 				<?php if ( $excerpt ) : ?>
 				<p class="dk-cpt-excerpt"><?php echo esc_html( $excerpt ); ?></p>
 				<?php endif; ?>
+				<?php if ( $price && 'treatment' === $type ) : ?>
+				<div class="dk-treatment-price">
+					<span class="dk-price-value"><?php echo esc_html( $price ); ?></span>
+					<?php if ( $price_note ) : ?>
+					<span class="dk-price-note"><?php echo esc_html( $price_note ); ?></span>
+					<?php endif; ?>
+				</div>
+				<?php endif; ?>
+				<?php if ( 'team' === $type ) :
+					$socials = [
+						'linkedin'  => get_post_meta( get_the_ID(), '_dk_team_linkedin',  true ),
+						'instagram' => get_post_meta( get_the_ID(), '_dk_team_instagram', true ),
+						'facebook'  => get_post_meta( get_the_ID(), '_dk_team_facebook',  true ),
+						'twitter'   => get_post_meta( get_the_ID(), '_dk_team_twitter',   true ),
+					];
+					$socials = array_filter( $socials );
+					if ( $socials ) : ?>
+				<div class="dk-team-socials">
+					<?php foreach ( $socials as $platform => $url ) : ?>
+					<a href="<?php echo esc_url( $url ); ?>" class="dk-team-social-link dk-team-social-<?php echo esc_attr( $platform ); ?>"
+					   target="_blank" rel="noopener noreferrer">
+						<?php echo esc_html( ucfirst( $platform ) ); ?>
+					</a>
+					<?php endforeach; ?>
+				</div>
+				<?php endif; endif; ?>
 				<a href="<?php echo esc_url( $permalink ); ?>" class="dk-cpt-link">
-					<?php esc_html_e( 'Read More', 'dentalkit' ); ?> &rarr;
+					<?php esc_html_e( 'Read More', 'DentalFocus' ); ?> &rarr;
 				</a>
 				<?php endif; ?>
 			</div>

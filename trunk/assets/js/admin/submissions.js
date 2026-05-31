@@ -1,4 +1,4 @@
-/* DentalKit Submissions Admin — v2.0.0 */
+﻿/* DentalFocus Submissions Admin — v2.0.0 */
 
 ( function () {
 	'use strict';

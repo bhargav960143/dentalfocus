@@ -3,85 +3,85 @@ declare(strict_types=1);
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-use DentalKit\FormBuilder\FormRepository;
-use DentalKit\FormBuilder\SubmissionRepository;
-use DentalKit\PostTypes\PostTypeRegistry;
+use DentalFocus\FormBuilder\FormRepository;
+use DentalFocus\FormBuilder\SubmissionRepository;
+use DentalFocus\PostTypes\PostTypeRegistry;
 
 $form_count       = ( new FormRepository() )->count();
 $submission_count = ( new SubmissionRepository() )->count();
 
 $cards = [
 	[
-		'title'  => __( 'Form Builder', 'dentalkit' ),
-		'desc'   => __( 'Create drag-and-drop forms. Auto-generates shortcodes. Capture patient enquiries.', 'dentalkit' ),
+		'title'  => __( 'Form Builder', 'DentalFocus' ),
+		'desc'   => __( 'Create drag-and-drop forms. Auto-generates shortcodes. Capture patient enquiries.', 'DentalFocus' ),
 		'icon'   => 'dashicons-feedback',
 		'links'  => [
-			[ 'url' => admin_url( 'admin.php?page=dk-forms' ),                   'label' => __( 'All Forms', 'dentalkit' ) ],
-			[ 'url' => admin_url( 'admin.php?page=dk-forms&action=create' ),     'label' => __( 'Add New', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'admin.php?page=dk-forms' ),                   'label' => __( 'All Forms', 'DentalFocus' ) ],
+			[ 'url' => admin_url( 'admin.php?page=dk-forms&action=create' ),     'label' => __( 'Add New', 'DentalFocus' ) ],
 		],
-		'badge'  => sprintf( __( '%d form(s)', 'dentalkit' ), $form_count ),
+		'badge'  => sprintf( __( '%d form(s)', 'DentalFocus' ), $form_count ),
 	],
 	[
-		'title'  => __( 'Submissions', 'dentalkit' ),
-		'desc'   => __( 'View and export all form submissions. Filter by form. Download as CSV.', 'dentalkit' ),
+		'title'  => __( 'Submissions', 'DentalFocus' ),
+		'desc'   => __( 'View and export all form submissions. Filter by form. Download as CSV.', 'DentalFocus' ),
 		'icon'   => 'dashicons-list-view',
 		'links'  => [
-			[ 'url' => admin_url( 'admin.php?page=dk-submissions' ), 'label' => __( 'View All', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'admin.php?page=dk-submissions' ), 'label' => __( 'View All', 'DentalFocus' ) ],
 		],
-		'badge'  => sprintf( __( '%d submission(s)', 'dentalkit' ), $submission_count ),
+		'badge'  => sprintf( __( '%d submission(s)', 'DentalFocus' ), $submission_count ),
 	],
 	[
-		'title'  => __( 'Testimonials', 'dentalkit' ),
-		'desc'   => __( 'Manage patient testimonials. Use shortcode [dk_testimonials] to display.', 'dentalkit' ),
+		'title'  => __( 'Testimonials', 'DentalFocus' ),
+		'desc'   => __( 'Manage patient testimonials. Use shortcode [dk_testimonials] to display.', 'DentalFocus' ),
 		'icon'   => 'dashicons-format-quote',
 		'links'  => [
-			[ 'url' => admin_url( 'edit.php?post_type=dk-testimonial' ),     'label' => __( 'All', 'dentalkit' ) ],
-			[ 'url' => admin_url( 'post-new.php?post_type=dk-testimonial' ), 'label' => __( 'Add New', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'edit.php?post_type=dk-testimonial' ),     'label' => __( 'All', 'DentalFocus' ) ],
+			[ 'url' => admin_url( 'post-new.php?post_type=dk-testimonial' ), 'label' => __( 'Add New', 'DentalFocus' ) ],
 		],
 	],
 	[
-		'title'  => __( 'Team', 'dentalkit' ),
-		'desc'   => __( 'Manage dental team members. Assign categories and display on any page.', 'dentalkit' ),
+		'title'  => __( 'Team', 'DentalFocus' ),
+		'desc'   => __( 'Manage dental team members. Assign categories and display on any page.', 'DentalFocus' ),
 		'icon'   => 'dashicons-groups',
 		'links'  => [
-			[ 'url' => admin_url( 'edit.php?post_type=dk-team' ),     'label' => __( 'All', 'dentalkit' ) ],
-			[ 'url' => admin_url( 'post-new.php?post_type=dk-team' ), 'label' => __( 'Add New', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'edit.php?post_type=dk-team' ),     'label' => __( 'All', 'DentalFocus' ) ],
+			[ 'url' => admin_url( 'post-new.php?post_type=dk-team' ), 'label' => __( 'Add New', 'DentalFocus' ) ],
 		],
 	],
 	[
-		'title'  => __( 'Treatments', 'dentalkit' ),
-		'desc'   => __( 'Manage dental treatment listings with categories and pricing info.', 'dentalkit' ),
+		'title'  => __( 'Treatments', 'DentalFocus' ),
+		'desc'   => __( 'Manage dental treatment listings with categories and pricing info.', 'DentalFocus' ),
 		'icon'   => 'dashicons-plus-alt',
 		'links'  => [
-			[ 'url' => admin_url( 'edit.php?post_type=dk-treatment' ),     'label' => __( 'All', 'dentalkit' ) ],
-			[ 'url' => admin_url( 'post-new.php?post_type=dk-treatment' ), 'label' => __( 'Add New', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'edit.php?post_type=dk-treatment' ),     'label' => __( 'All', 'DentalFocus' ) ],
+			[ 'url' => admin_url( 'post-new.php?post_type=dk-treatment' ), 'label' => __( 'Add New', 'DentalFocus' ) ],
 		],
 	],
 	[
-		'title'  => __( 'Portfolio', 'dentalkit' ),
-		'desc'   => __( 'Before/after case studies and smile gallery management.', 'dentalkit' ),
+		'title'  => __( 'Portfolio', 'DentalFocus' ),
+		'desc'   => __( 'Before/after case studies and smile gallery management.', 'DentalFocus' ),
 		'icon'   => 'dashicons-portfolio',
 		'links'  => [
-			[ 'url' => admin_url( 'edit.php?post_type=dk-portfolio' ),     'label' => __( 'All', 'dentalkit' ) ],
-			[ 'url' => admin_url( 'post-new.php?post_type=dk-portfolio' ), 'label' => __( 'Add New', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'edit.php?post_type=dk-portfolio' ),     'label' => __( 'All', 'DentalFocus' ) ],
+			[ 'url' => admin_url( 'post-new.php?post_type=dk-portfolio' ), 'label' => __( 'Add New', 'DentalFocus' ) ],
 		],
 	],
 	[
-		'title'  => __( 'Banners', 'dentalkit' ),
-		'desc'   => __( 'Manage hero banners and promotional slides for your dental website.', 'dentalkit' ),
+		'title'  => __( 'Banners', 'DentalFocus' ),
+		'desc'   => __( 'Manage hero banners and promotional slides for your dental website.', 'DentalFocus' ),
 		'icon'   => 'dashicons-format-gallery',
 		'links'  => [
-			[ 'url' => admin_url( 'edit.php?post_type=dk-banner' ),     'label' => __( 'All', 'dentalkit' ) ],
-			[ 'url' => admin_url( 'post-new.php?post_type=dk-banner' ), 'label' => __( 'Add New', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'edit.php?post_type=dk-banner' ),     'label' => __( 'All', 'DentalFocus' ) ],
+			[ 'url' => admin_url( 'post-new.php?post_type=dk-banner' ), 'label' => __( 'Add New', 'DentalFocus' ) ],
 		],
 	],
 	[
-		'title'  => __( 'Settings', 'dentalkit' ),
-		'desc'   => __( 'Configure email notifications, social media links, and plugin options.', 'dentalkit' ),
+		'title'  => __( 'Settings', 'DentalFocus' ),
+		'desc'   => __( 'Configure email notifications, social media links, and plugin options.', 'DentalFocus' ),
 		'icon'   => 'dashicons-admin-settings',
 		'links'  => [
-			[ 'url' => admin_url( 'admin.php?page=dk-settings' ),             'label' => __( 'General', 'dentalkit' ) ],
-			[ 'url' => admin_url( 'admin.php?page=dk-settings&tab=social' ),  'label' => __( 'Social Media', 'dentalkit' ) ],
+			[ 'url' => admin_url( 'admin.php?page=dk-settings' ),             'label' => __( 'General', 'DentalFocus' ) ],
+			[ 'url' => admin_url( 'admin.php?page=dk-settings&tab=social' ),  'label' => __( 'Social Media', 'DentalFocus' ) ],
 		],
 	],
 ];
@@ -89,12 +89,12 @@ $cards = [
 <div class="wrap dk-dashboard">
 	<h1 class="wp-heading-inline">
 		<span class="dashicons dashicons-heart"></span>
-		<?php echo esc_html__( 'DentalKit', 'dentalkit' ); ?>
-		<span class="dk-version">v<?php echo esc_html( DentalKit\Plugin::VERSION ); ?></span>
+		<?php echo esc_html__( 'DentalFocus', 'DentalFocus' ); ?>
+		<span class="dk-version">v<?php echo esc_html( DentalFocus\Plugin::VERSION ); ?></span>
 	</h1>
 
 	<p class="dk-dashboard-intro">
-		<?php esc_html_e( 'Complete dental practice website toolkit. Select a module below to get started.', 'dentalkit' ); ?>
+		<?php esc_html_e( 'Complete dental practice website toolkit. Select a module below to get started.', 'DentalFocus' ); ?>
 	</p>
 
 	<div class="dk-cards">

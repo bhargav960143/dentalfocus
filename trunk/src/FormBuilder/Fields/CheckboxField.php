@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 class CheckboxField extends AbstractField {
 
 	public function get_type(): string  { return 'checkbox'; }
-	public function get_label(): string { return __( 'Checkboxes', 'dentalkit' ); }
+	public function get_label(): string { return __( 'Checkboxes', 'DentalFocus' ); }
 	public function get_icon(): string  { return 'dashicons-yes-alt'; }
 
 	public function render( array $field, mixed $value = null ): string {

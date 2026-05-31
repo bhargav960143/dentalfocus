@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit;
+namespace DentalFocus;
 
 class Activator {
 
@@ -17,7 +17,7 @@ class Activator {
 			deactivate_plugins( DK_PLUGIN_BASENAME );
 			wp_die(
 				/* translators: %s: minimum PHP version */
-				sprintf( esc_html__( 'DentalKit requires PHP %s or higher.', 'dentalkit' ), Plugin::MIN_PHP )
+				sprintf( esc_html__( 'DentalFocus requires PHP %s or higher.', 'DentalFocus' ), Plugin::MIN_PHP )
 			);
 		}
 
@@ -25,7 +25,7 @@ class Activator {
 			deactivate_plugins( DK_PLUGIN_BASENAME );
 			wp_die(
 				/* translators: %s: minimum WordPress version */
-				sprintf( esc_html__( 'DentalKit requires WordPress %s or higher.', 'dentalkit' ), Plugin::MIN_WP )
+				sprintf( esc_html__( 'DentalFocus requires WordPress %s or higher.', 'DentalFocus' ), Plugin::MIN_WP )
 			);
 		}
 	}

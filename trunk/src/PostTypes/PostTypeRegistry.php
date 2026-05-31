@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\PostTypes;
+namespace DentalFocus\PostTypes;
 
 class PostTypeRegistry {
 
@@ -49,7 +49,7 @@ class PostTypeRegistry {
 			$plural = $label . 's';
 
 			register_post_type( $slug, [
-				'label'               => __( $plural, 'dentalkit' ),
+				'label'               => __( $plural, 'DentalFocus' ),
 				'labels'              => $this->build_labels( $label, $plural ),
 				'description'         => '',
 				'public'              => true,
@@ -75,15 +75,15 @@ class PostTypeRegistry {
 		return [
 			'name'               => $plural,
 			'singular_name'      => $singular,
-			'add_new'            => __( 'Add New', 'dentalkit' ),
-			'add_new_item'       => sprintf( __( 'Add New %s', 'dentalkit' ), $singular ),
-			'edit_item'          => sprintf( __( 'Edit %s', 'dentalkit' ), $singular ),
-			'new_item'           => sprintf( __( 'New %s', 'dentalkit' ), $singular ),
-			'view_item'          => sprintf( __( 'View %s', 'dentalkit' ), $singular ),
-			'search_items'       => sprintf( __( 'Search %s', 'dentalkit' ), $plural ),
-			'not_found'          => sprintf( __( 'No %s found', 'dentalkit' ), strtolower( $plural ) ),
-			'not_found_in_trash' => sprintf( __( 'No %s in trash', 'dentalkit' ), strtolower( $plural ) ),
-			'all_items'          => sprintf( __( 'All %s', 'dentalkit' ), $plural ),
+			'add_new'            => __( 'Add New', 'DentalFocus' ),
+			'add_new_item'       => sprintf( __( 'Add New %s', 'DentalFocus' ), $singular ),
+			'edit_item'          => sprintf( __( 'Edit %s', 'DentalFocus' ), $singular ),
+			'new_item'           => sprintf( __( 'New %s', 'DentalFocus' ), $singular ),
+			'view_item'          => sprintf( __( 'View %s', 'DentalFocus' ), $singular ),
+			'search_items'       => sprintf( __( 'Search %s', 'DentalFocus' ), $plural ),
+			'not_found'          => sprintf( __( 'No %s found', 'DentalFocus' ), strtolower( $plural ) ),
+			'not_found_in_trash' => sprintf( __( 'No %s in trash', 'DentalFocus' ), strtolower( $plural ) ),
+			'all_items'          => sprintf( __( 'All %s', 'DentalFocus' ), $plural ),
 			'menu_name'          => $plural,
 		];
 	}

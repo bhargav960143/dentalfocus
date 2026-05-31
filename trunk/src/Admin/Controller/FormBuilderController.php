@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\Admin\Controller;
+namespace DentalFocus\Admin\Controller;
 
-use DentalKit\FormBuilder\FormRepository;
+use DentalFocus\FormBuilder\FormRepository;
 
 class FormBuilderController {
 
@@ -15,7 +15,7 @@ class FormBuilderController {
 
 	public function render(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Insufficient permissions.', 'dentalkit' ) );
+			wp_die( esc_html__( 'Insufficient permissions.', 'DentalFocus' ) );
 		}
 
 		$action = sanitize_key( $_GET['action'] ?? 'index' );
@@ -37,7 +37,7 @@ class FormBuilderController {
 		$form = $id ? $this->repo->find( $id ) : null;
 
 		if ( $id && ! $form ) {
-			wp_die( esc_html__( 'Form not found.', 'dentalkit' ) );
+			wp_die( esc_html__( 'Form not found.', 'DentalFocus' ) );
 		}
 
 		require DK_PLUGIN_DIR . 'views/admin/form-builder/edit.php';
@@ -47,7 +47,7 @@ class FormBuilderController {
 		$id = absint( $_GET['id'] ?? 0 );
 
 		if ( ! $id ) {
-			wp_die( esc_html__( 'Invalid form ID.', 'dentalkit' ) );
+			wp_die( esc_html__( 'Invalid form ID.', 'DentalFocus' ) );
 		}
 
 		check_admin_referer( 'dk_delete_form_' . $id );

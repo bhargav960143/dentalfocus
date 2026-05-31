@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 class EmailField extends AbstractField {
 
 	public function get_type(): string  { return 'email'; }
-	public function get_label(): string { return __( 'Email Field', 'dentalkit' ); }
+	public function get_label(): string { return __( 'Email Field', 'DentalFocus' ); }
 	public function get_icon(): string  { return 'dashicons-email'; }
 
 	public function render( array $field, mixed $value = null ): string {
@@ -34,7 +34,7 @@ class EmailField extends AbstractField {
 			return $base;
 		}
 		if ( '' !== $value && ! is_email( $value ) ) {
-			return __( 'Please enter a valid email address.', 'dentalkit' );
+			return __( 'Please enter a valid email address.', 'DentalFocus' );
 		}
 		return true;
 	}

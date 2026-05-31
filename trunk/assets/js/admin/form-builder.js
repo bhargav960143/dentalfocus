@@ -1,4 +1,4 @@
-/* DentalKit Form Builder — v2.0.0 */
+﻿/* DentalFocus Form Builder — v2.0.0 */
 /* global DK, DKBuilderData, Sortable */
 
 ( function () {
@@ -163,7 +163,7 @@
 	function openFieldSettings( fieldId ) {
 		const field = formFields.find( f => f.id === fieldId );
 		if ( ! field ) {
-			console.warn( 'DentalKit: field not found in formFields:', fieldId );
+			console.warn( 'DentalFocus: field not found in formFields:', fieldId );
 			return;
 		}
 

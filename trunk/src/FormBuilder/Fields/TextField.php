@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 class TextField extends AbstractField {
 
 	public function get_type(): string  { return 'text'; }
-	public function get_label(): string { return __( 'Text Field', 'dentalkit' ); }
+	public function get_label(): string { return __( 'Text Field', 'DentalFocus' ); }
 	public function get_icon(): string  { return 'dashicons-editor-textcolor'; }
 
 	public function render( array $field, mixed $value = null ): string {

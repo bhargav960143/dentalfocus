@@ -15,40 +15,40 @@ $delete_url = wp_nonce_url(
 );
 ?>
 <div class="wrap">
-	<h1><?php esc_html_e( 'Submission Detail', 'dentalkit' ); ?></h1>
+	<h1><?php esc_html_e( 'Submission Detail', 'DentalFocus' ); ?></h1>
 
 	<div class="dk-submission-header">
 		<a href="<?php echo esc_url( $back_url ); ?>" class="button">
-			&larr; <?php esc_html_e( 'Back to Submissions', 'dentalkit' ); ?>
+			&larr; <?php esc_html_e( 'Back to Submissions', 'DentalFocus' ); ?>
 		</a>
 		<a href="<?php echo esc_url( $export_url ); ?>" class="button">
 			<span class="dashicons dashicons-download"></span>
-			<?php esc_html_e( 'Export Form CSV', 'dentalkit' ); ?>
+			<?php esc_html_e( 'Export Form CSV', 'DentalFocus' ); ?>
 		</a>
 		<a href="<?php echo esc_url( $delete_url ); ?>" class="button dk-btn-danger"
-		   onclick="return confirm('<?php echo esc_js( __( 'Delete this submission?', 'dentalkit' ) ); ?>')">
-			<?php esc_html_e( 'Delete', 'dentalkit' ); ?>
+		   onclick="return confirm('<?php echo esc_js( __( 'Delete this submission?', 'DentalFocus' ) ); ?>')">
+			<?php esc_html_e( 'Delete', 'DentalFocus' ); ?>
 		</a>
 	</div>
 
 	<div class="dk-submission-meta postbox">
-		<h3 class="hndle"><?php esc_html_e( 'Submission Info', 'dentalkit' ); ?></h3>
+		<h3 class="hndle"><?php esc_html_e( 'Submission Info', 'DentalFocus' ); ?></h3>
 		<div class="inside">
 			<table class="dk-meta-table">
 				<tr>
-					<th><?php esc_html_e( 'ID', 'dentalkit' ); ?></th>
+					<th><?php esc_html_e( 'ID', 'DentalFocus' ); ?></th>
 					<td><?php echo absint( $submission['id'] ); ?></td>
 				</tr>
 				<tr>
-					<th><?php esc_html_e( 'Form', 'dentalkit' ); ?></th>
-					<td><?php echo $form ? esc_html( $form['name'] ) : esc_html__( 'Unknown', 'dentalkit' ); ?></td>
+					<th><?php esc_html_e( 'Form', 'DentalFocus' ); ?></th>
+					<td><?php echo $form ? esc_html( $form['name'] ) : esc_html__( 'Unknown', 'DentalFocus' ); ?></td>
 				</tr>
 				<tr>
-					<th><?php esc_html_e( 'Date', 'dentalkit' ); ?></th>
+					<th><?php esc_html_e( 'Date', 'DentalFocus' ); ?></th>
 					<td><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $submission['created_at'] . ' UTC' ) ) ); ?></td>
 				</tr>
 				<tr>
-					<th><?php esc_html_e( 'IP Address', 'dentalkit' ); ?></th>
+					<th><?php esc_html_e( 'IP Address', 'DentalFocus' ); ?></th>
 					<td><?php echo esc_html( $submission['ip_address'] ?? '' ); ?></td>
 				</tr>
 			</table>
@@ -56,13 +56,13 @@ $delete_url = wp_nonce_url(
 	</div>
 
 	<div class="dk-submission-data postbox">
-		<h3 class="hndle"><?php esc_html_e( 'Submitted Data', 'dentalkit' ); ?></h3>
+		<h3 class="hndle"><?php esc_html_e( 'Submitted Data', 'DentalFocus' ); ?></h3>
 		<div class="inside">
 			<table class="dk-data-table">
 				<thead>
 					<tr>
-						<th><?php esc_html_e( 'Field', 'dentalkit' ); ?></th>
-						<th><?php esc_html_e( 'Value', 'dentalkit' ); ?></th>
+						<th><?php esc_html_e( 'Field', 'DentalFocus' ); ?></th>
+						<th><?php esc_html_e( 'Value', 'DentalFocus' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>

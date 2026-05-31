@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\FormBuilder\Fields;
+namespace DentalFocus\FormBuilder\Fields;
 
 class SelectField extends AbstractField {
 
 	public function get_type(): string  { return 'select'; }
-	public function get_label(): string { return __( 'Dropdown', 'dentalkit' ); }
+	public function get_label(): string { return __( 'Dropdown', 'DentalFocus' ); }
 	public function get_icon(): string  { return 'dashicons-arrow-down-alt2'; }
 
 	public function render( array $field, mixed $value = null ): string {
@@ -15,7 +15,7 @@ class SelectField extends AbstractField {
 		$required = ! empty( $field['required'] ) ? ' required' : '';
 		$options  = (array) ( $field['options'] ?? [] );
 
-		$opts_html = '<option value="">' . esc_html__( '— Select —', 'dentalkit' ) . '</option>';
+		$opts_html = '<option value="">' . esc_html__( '— Select —', 'DentalFocus' ) . '</option>';
 		foreach ( $options as $opt ) {
 			$opt_clean = trim( (string) $opt );
 			$opt_attr  = esc_attr( $opt_clean );

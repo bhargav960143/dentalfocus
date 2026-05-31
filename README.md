@@ -441,7 +441,7 @@ GPL-2.0-or-later — see [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html)
 **Bhargav Patel** — Full Stack WordPress Developer
 
 <p>
-  <a href="https://www.linkedin.com/in/bhargavpateldeveloper/">
+  <a href="https://www.linkedin.com/in/bhargav-patel-tech-partner/">
     <img src="https://img.shields.io/badge/LinkedIn-Bhargav%20Patel-0077b5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
   </a>
   &nbsp;

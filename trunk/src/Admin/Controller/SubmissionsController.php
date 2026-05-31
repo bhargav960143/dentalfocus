@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace DentalKit\Admin\Controller;
+namespace DentalFocus\Admin\Controller;
 
-use DentalKit\FormBuilder\FormRepository;
-use DentalKit\FormBuilder\SubmissionRepository;
-use DentalKit\Export\CsvExporter;
+use DentalFocus\FormBuilder\FormRepository;
+use DentalFocus\FormBuilder\SubmissionRepository;
+use DentalFocus\Export\CsvExporter;
 
 class SubmissionsController {
 
@@ -19,7 +19,7 @@ class SubmissionsController {
 
 	public function render(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Insufficient permissions.', 'dentalkit' ) );
+			wp_die( esc_html__( 'Insufficient permissions.', 'DentalFocus' ) );
 		}
 
 		$action = sanitize_key( $_GET['action'] ?? 'index' );
@@ -47,7 +47,7 @@ class SubmissionsController {
 		$submission = $id ? $this->repo->find( $id ) : null;
 
 		if ( ! $submission ) {
-			wp_die( esc_html__( 'Submission not found.', 'dentalkit' ) );
+			wp_die( esc_html__( 'Submission not found.', 'DentalFocus' ) );
 		}
 
 		$form = $this->form_repo->find( (int) $submission['form_id'] );
@@ -70,7 +70,7 @@ class SubmissionsController {
 	private function handle_delete(): void {
 		$id = absint( $_GET['id'] ?? 0 );
 		if ( ! $id ) {
-			wp_die( esc_html__( 'Invalid submission ID.', 'dentalkit' ) );
+			wp_die( esc_html__( 'Invalid submission ID.', 'DentalFocus' ) );
 		}
 
 		check_admin_referer( 'dk_delete_submission_' . $id );
