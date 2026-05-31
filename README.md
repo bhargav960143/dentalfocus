@@ -1,7 +1,7 @@
-# DentalKit
+# DentalFocus
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/banner-772x250.jpg" alt="DentalKit — WordPress Plugin for Dental Practices" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/banner-772x250.jpg" alt="DentalFocus — WordPress Plugin for Dental Practices" />
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@
 
 <p align="center">
   <a href="https://github.com/bhargav960143/dentalkit/archive/refs/heads/master.zip">
-    <img src="https://img.shields.io/badge/⬇%20Download%20Plugin-DentalKit%20v2.0.0-0073aa?style=for-the-badge&logo=wordpress&logoColor=white" alt="Download DentalKit v2.0.0" />
+    <img src="https://img.shields.io/badge/⬇%20Download%20Plugin-DentalFocus%20v2.0.0-0073aa?style=for-the-badge&logo=wordpress&logoColor=white" alt="Download DentalFocus v2.0.0" />
   </a>
   &nbsp;&nbsp;
   <a href="https://github.com/bhargav960143/dentalkit/issues">
@@ -53,8 +53,8 @@
 | **Social Media** | Manage links, display with `[dk_social]` or `[dk_social_list]`. |
 | **REST API** | Full CRUD at `/wp-json/dentalkit/v1/forms`. |
 | **Security** | `$wpdb->prepare()` everywhere, nonces, `manage_options` checks, output escaping. |
-| **Performance** | Assets load only on DentalKit pages and shortcode pages. PSR-4 autoloading. |
-| **i18n** | Translation-ready, `dentalkit` text domain, POT file included. |
+| **Performance** | Assets load only on DentalFocus pages and shortcode pages. PSR-4 autoloading. |
+| **i18n** | Translation-ready, `dentalfocus` text domain, POT file included. |
 
 ---
 
@@ -62,7 +62,7 @@
 
 ### Dashboard
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-1.png" alt="DentalKit Dashboard" width="100%" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-1.png" alt="DentalFocus Dashboard" width="100%" />
 </p>
 
 Overview of all modules — Form Builder, Submissions, Testimonials, Team, Treatments, Portfolio, Banners, Settings.
@@ -138,11 +138,11 @@ Frontend form rendered by `[dk_form id="1"]`. Fully responsive, accessible, AJAX
 
 **Step 1 — Create a form**
 
-Go to **DentalKit → Form Builder → Add New Form**.
+Go to **DentalFocus → Form Builder → Add New Form**.
 Enter a form name (e.g. *Appointment Request*) and an optional description.
 
 ```
-DentalKit
+DentalFocus
  └── Form Builder
       └── Add New Form  ← click here
 ```
@@ -177,7 +177,7 @@ The screen is split into two panels:
 
 **Step 3 — Save → shortcode appears automatically**
 
-Click **Save Form**. DentalKit saves the form and instantly displays:
+Click **Save Form**. DentalFocus saves the form and instantly displays:
 
 ```
 Shortcode:  [dk_form id="1"]   [Copy]
@@ -201,7 +201,7 @@ Publish the page. Your form is live.
 Visitor fills form → clicks Submit
         │
         ▼
-DentalKit validates each field (required, email format, phone format)
+DentalFocus validates each field (required, email format, phone format)
         │
         ├─ Validation fails → inline error messages shown, no data sent
         │
@@ -219,10 +219,10 @@ DentalKit validates each field (required, email format, phone format)
 
 ### Viewing & Exporting Submissions
 
-Go to **DentalKit → Submissions**.
+Go to **DentalFocus → Submissions**.
 
 ```
-DentalKit
+DentalFocus
  └── Submissions
       ├── Filter by form  [dropdown]
       ├── [Export CSV]    ← downloads all submissions as .csv (Excel-ready)
@@ -267,7 +267,7 @@ All shortcodes support:
 
 ### Social Media Links
 
-1. Go to **DentalKit → Settings → Social Media tab**
+1. Go to **DentalFocus → Settings → Social Media tab**
 2. Click **Add New** — enter title (e.g. *Facebook*) and URL
 3. The slug is auto-generated (e.g. `facebook`)
 4. Use in templates:
@@ -293,10 +293,10 @@ All shortcodes support:
 ## Installation
 
 1. Clone or download this repository.
-2. Copy the `trunk/` folder to `/wp-content/plugins/dentalkit/`.
+2. Copy the `trunk/` folder to `/wp-content/plugins/dentalfocus/`.
 3. In WordPress admin go to **Plugins → Installed Plugins**.
-4. Activate **DentalKit**.
-5. Go to **DentalKit → Form Builder → Add New Form** to create your first form.
+4. Activate **DentalFocus**.
+5. Go to **DentalFocus → Form Builder → Add New Form** to create your first form.
 6. Paste the generated shortcode into any page or post.
 
 ---
@@ -348,7 +348,7 @@ All endpoints require `manage_options` capability. Authenticate via WP nonce hea
 
 ```
 trunk/
-├── dentalkit.php           # Plugin header + PSR-4 autoloader
+├── dentalfocus.php         # Plugin header + PSR-4 autoloader
 ├── uninstall.php           # Clean table removal on uninstall
 ├── src/
 │   ├── Plugin.php          # Singleton bootstrap
@@ -382,7 +382,7 @@ trunk/
 │   ├── css/                # admin.css, frontend.css
 │   └── js/                 # form-builder.js, submissions.js, form.js
 └── languages/
-    └── dentalkit.pot
+    └── dentalfocus.pot
 ```
 
 **Database Tables:**
@@ -465,4 +465,3 @@ Support this project by becoming a sponsor.
 </a>
 
 **[Trentium Solution](https://www.trentiums.com/)** — Web & Mobile Development Company
-
