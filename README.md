@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.0.0-blue.svg?style=for-the-badge" alt="Version 2.0.0" />
+  <img src="https://img.shields.io/badge/version-2.8.0-blue.svg?style=for-the-badge" alt="Version 2.8.0" />
   <img src="https://img.shields.io/badge/WordPress-%3E%3D6.0-21759b.svg?style=for-the-badge&logo=wordpress" alt="WordPress 6.0+" />
   <img src="https://img.shields.io/badge/PHP-%3E%3D8.0-8892bf.svg?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.0+" />
   <img src="https://img.shields.io/badge/license-GPL--2.0--or--later-green.svg?style=for-the-badge" alt="License" />
@@ -19,14 +19,14 @@
 </p>
 
 <p align="center">
-  Complete dental practice website toolkit — drag-and-drop form builder, custom post types, submissions management, CSV export, and social media management.
+  Complete dental practice website toolkit — drag-and-drop form builder, custom post types, submissions management, CSV export, Gutenberg blocks, and social media management.
 </p>
 
 <br />
 
 <p align="center">
   <a href="https://github.com/bhargav960143/dentalkit/archive/refs/heads/master.zip">
-    <img src="https://img.shields.io/badge/⬇%20Download%20Plugin-DentalFocus%20v2.0.0-0073aa?style=for-the-badge&logo=wordpress&logoColor=white" alt="Download DentalFocus v2.0.0" />
+    <img src="https://img.shields.io/badge/⬇%20Download%20Plugin-DentalFocus%20v2.8.0-0073aa?style=for-the-badge&logo=wordpress&logoColor=white" alt="Download DentalFocus v2.8.0" />
   </a>
   &nbsp;&nbsp;
   <a href="https://github.com/bhargav960143/dentalkit/issues">
@@ -48,11 +48,24 @@
 | **Auto Shortcodes** | `[dk_form id="1"]` generated automatically on save. |
 | **Submissions** | Capture, view, filter, and delete form submissions. |
 | **CSV Export** | UTF-8 + BOM export, Excel-compatible. Filter by form first. |
-| **Email Notifications** | Per-submission email alert to configurable address. |
+| **Email Notifications** | Per-submission email to configurable address + patient confirmation email. |
+| **Per-form Confirmation** | Custom thank-you message per form, shown after submission. |
+| **Honeypot Spam Protection** | Silent bot blocking on all forms — no CAPTCHA friction. |
+| **GDPR Consent** | Optional consent checkbox on all forms — enable in Settings → General. |
 | **CPT Shortcodes** | `[dk_testimonials]`, `[dk_team]`, `[dk_treatments]`, `[dk_portfolio]`, `[dk_banners]` |
+| **Star Ratings** | 1–5 star ratings on testimonials, displayed in gold on the frontend. |
+| **Treatment Price** | Price and price note on treatment posts, displayed on treatment cards. |
+| **Team Social Links** | LinkedIn, Instagram, Facebook, Twitter fields on team member profiles. |
+| **Before/After Slider** | Drag-to-reveal image comparison slider for portfolio posts. |
 | **Social Media** | Manage links, display with `[dk_social]` or `[dk_social_list]`. |
-| **REST API** | Full CRUD at `/wp-json/dentalkit/v1/forms`. |
-| **Security** | `$wpdb->prepare()` everywhere, nonces, `manage_options` checks, output escaping. |
+| **WhatsApp Button** | `[dk_whatsapp]` click-to-chat shortcode with button/link styles. |
+| **Click-to-Call** | `[dk_call]` shortcode renders a tappable phone number. |
+| **Google Maps** | `[dk_map address="..."]` embeds a Google Maps iframe. |
+| **Opening Hours** | `[dk_opening_hours]` table/list from Settings → Opening Hours. |
+| **Treatment Enquiry** | `[dk_treatment_enquiry id="1"]` pre-fills form with treatment name. |
+| **Gutenberg Blocks** | All shortcodes available as blocks under the "Dental Focus" category. |
+| **REST API** | Full CRUD at `/wp-json/DentalFocus/v1/forms`. |
+| **Security** | `$wpdb->prepare()` everywhere, nonces, `manage_options` checks, output escaping, CSV formula injection protection. |
 | **Performance** | Assets load only on DentalFocus pages and shortcode pages. PSR-4 autoloading. |
 | **i18n** | Translation-ready, `dentalfocus` text domain, POT file included. |
 
@@ -119,7 +132,7 @@ Full submission data with field labels, values, timestamp, and IP address.
   <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-8.png" alt="Frontend form rendered by shortcode" width="100%" />
 </p>
 
-Three tabs — **General**: email notification toggle, notification email address, reCAPTCHA v3 site/secret keys. **Social Media**: manage social links. **Help & Guide**: usage reference.
+Tabs — **General**: email notifications, reCAPTCHA, GDPR consent. **Social Media**: manage social links. **Opening Hours**: per-day hours with open/closed toggle. **Help & Guide**: usage reference.
 
 ---
 
@@ -207,12 +220,14 @@ DentalFocus validates each field (required, email format, phone format)
         │
         └─ Validation passes
                 │
+                ├─ Honeypot check → bot detected → silent discard
+                │
                 ▼
         Data saved to database (wp_dk_submissions table)
                 │
                 ├─ Email notification sent to admin (if enabled in Settings)
-                │
-                └─ Success message shown to visitor
+                ├─ Confirmation email sent to patient (if email field present)
+                └─ Custom confirmation message shown to visitor
 ```
 
 ---
@@ -236,6 +251,7 @@ The CSV file:
 - Opens correctly in Microsoft Excel (UTF-8 BOM included)
 - First row = column headers (field labels)
 - One row per submission
+- Formula injection protected — values prefixed where needed
 
 ---
 
@@ -280,6 +296,76 @@ All shortcodes support:
 
 ---
 
+### Opening Hours
+
+1. Go to **DentalFocus → Settings → Opening Hours tab**
+2. Set open/closed and from/to time for each day of the week
+3. Display anywhere with:
+
+```
+[dk_opening_hours]              → table layout (default)
+[dk_opening_hours style="list"] → <ul> layout
+```
+
+Today's row is automatically highlighted.
+
+---
+
+### Before/After Slider
+
+Add before and after images to any Portfolio post via the **Before/After Images** meta box, then display:
+
+```
+[dk_before_after post="42"]                         → uses images from portfolio post ID 42
+[dk_before_after before="10" after="11"]            → direct attachment IDs
+[dk_before_after post="42" label_before="Old" label_after="New"]
+```
+
+Mouse and touch drag supported.
+
+---
+
+### Treatment Enquiry Form
+
+Pre-fills a contact form with the treatment name. Useful on individual treatment pages.
+
+```
+[dk_treatment_enquiry id="1"]
+```
+
+When placed on a treatment post, it auto-detects the treatment name. The `id` attribute sets which form to render.
+
+---
+
+### Utility Shortcodes
+
+```
+[dk_whatsapp number="+447700000000" message="Hello" label="Chat on WhatsApp" style="button"]
+[dk_call number="+447700000000" label="Call Us"]
+[dk_map address="10 Downing Street, London"]
+```
+
+---
+
+### Gutenberg Blocks
+
+All shortcodes are available as blocks under the **Dental Focus** category in the block inserter. Blocks render a live server-side preview in the editor.
+
+| Block | Settings |
+|-------|---------|
+| Dental Focus Form | Form dropdown |
+| Testimonials | Items, Columns, Category |
+| Team | Items, Columns, Category |
+| Treatments | Items, Columns, Category |
+| Portfolio | Items, Columns, Category |
+| Banners | Items, Columns, Category |
+| Social Link | Platform name |
+| Social Links List | — |
+| Before/After Slider | Post ID or Before/After attachment IDs, labels |
+| WhatsApp Button | Number, Message, Label, Style |
+
+---
+
 ## Requirements
 
 | Requirement | Minimum |
@@ -306,31 +392,45 @@ All shortcodes support:
 | Shortcode | Description | Attributes |
 |-----------|-------------|------------|
 | `[dk_form id="1"]` | Render a form | `id` (required) |
+| `[dk_treatment_enquiry id="1"]` | Treatment enquiry form | `id` (required), `treatment` (optional override) |
 | `[dk_testimonials]` | Testimonials grid | `limit`, `columns`, `category`, `orderby`, `order` |
 | `[dk_team]` | Team members grid | `limit`, `columns`, `category` |
 | `[dk_treatments]` | Treatments grid | `limit`, `columns`, `category` |
 | `[dk_portfolio]` | Portfolio grid | `limit`, `columns`, `category` |
 | `[dk_banners]` | Banners display | `limit`, `columns`, `category` |
+| `[dk_before_after]` | Before/after image slider | `post`, `before`, `after`, `label_before`, `label_after` |
 | `[dk_social name="facebook"]` | Single social link | `name` (slug), `label`, `class` |
 | `[dk_social_list]` | All social links as `<ul>` | `class` |
+| `[dk_whatsapp]` | WhatsApp click-to-chat button | `number`, `message`, `label`, `style` (`button`\|`link`) |
+| `[dk_call]` | Click-to-call link | `number`, `label` |
+| `[dk_map]` | Google Maps embed | `address` |
+| `[dk_opening_hours]` | Opening hours display | `style` (`table`\|`list`) |
 
 **Examples:**
 ```
 [dk_form id="1"]
+[dk_treatment_enquiry id="1"]
 [dk_testimonials limit="6" columns="3" category="general"]
 [dk_team columns="4"]
 [dk_treatments columns="3" limit="9"]
 [dk_portfolio columns="4" limit="12"]
 [dk_banners]
+[dk_before_after post="42"]
+[dk_before_after before="10" after="11" label_before="Old" label_after="New"]
 [dk_social name="facebook"]
 [dk_social_list]
+[dk_whatsapp number="+447700000000" message="Hello" label="Chat on WhatsApp" style="button"]
+[dk_call number="+447700000000" label="Call Us Now"]
+[dk_map address="10 Downing Street, London"]
+[dk_opening_hours]
+[dk_opening_hours style="list"]
 ```
 
 ---
 
 ## REST API
 
-Base URL: `/wp-json/dentalkit/v1/`
+Base URL: `/wp-json/DentalFocus/v1/`
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -359,14 +459,18 @@ trunk/
 │   │   ├── AdminMenu.php
 │   │   ├── Assets.php      # Conditional enqueue
 │   │   └── Controller/     # Dashboard, FormBuilder, Submissions, Settings
+│   ├── Blocks/
+│   │   └── BlockRegistrar.php  # Gutenberg block registration (10 blocks)
 │   ├── FormBuilder/
 │   │   ├── Fields/         # FieldInterface + 8 field types
 │   │   ├── FieldRegistry.php
 │   │   ├── FormRepository.php
 │   │   ├── SubmissionRepository.php
-│   │   ├── Shortcode.php
-│   │   ├── SocialShortcode.php
-│   │   ├── CptShortcodes.php
+│   │   ├── Shortcode.php           # dk_form, dk_treatment_enquiry
+│   │   ├── SocialShortcode.php     # dk_social, dk_social_list, dk_whatsapp, dk_call, dk_map
+│   │   ├── CptShortcodes.php       # dk_testimonials, dk_team, dk_treatments, dk_portfolio, dk_banners
+│   │   ├── BeforeAfterShortcode.php # dk_before_after
+│   │   ├── OpeningHoursShortcode.php # dk_opening_hours
 │   │   └── SubmissionHandler.php
 │   ├── Export/
 │   │   └── CsvExporter.php
@@ -374,13 +478,25 @@ trunk/
 │   │   └── FormEndpoint.php
 │   └── PostTypes/
 │       ├── PostTypeRegistry.php
-│       └── TaxonomyRegistry.php
+│       ├── TaxonomyRegistry.php
+│       ├── TreatmentMeta.php   # Price + price note fields
+│       ├── TeamMeta.php        # LinkedIn, Instagram, Facebook, Twitter
+│       ├── TestimonialMeta.php # Star rating (1–5)
+│       └── PortfolioMeta.php   # Before/after image attachment IDs
 ├── views/
 │   ├── admin/              # PHP view templates
 │   └── frontend/
 ├── assets/
 │   ├── css/                # admin.css, frontend.css
-│   └── js/                 # form-builder.js, submissions.js, form.js
+│   └── js/
+│       ├── admin/
+│       │   ├── form-builder.js
+│       │   ├── submissions.js
+│       │   ├── blocks.js           # Gutenberg block editor scripts
+│       │   └── portfolio-meta.js   # Media uploader for before/after images
+│       └── frontend/
+│           ├── form.js
+│           └── before-after.js     # Drag-to-reveal slider
 └── languages/
     └── dentalfocus.pot
 ```
@@ -389,7 +505,7 @@ trunk/
 
 | Table | Purpose |
 |-------|---------|
-| `{prefix}dk_forms` | Form name, description, fields JSON schema |
+| `{prefix}dk_forms` | Form name, description, fields JSON schema, confirmation message |
 | `{prefix}dk_submissions` | Captured form submissions (JSON) |
 | `{prefix}dk_social_media` | Social media links |
 
@@ -401,18 +517,69 @@ trunk/
 - Nonce verification on every form, AJAX request, and delete action
 - `current_user_can('manage_options')` check on every admin controller
 - `esc_html()`, `esc_attr()`, `esc_url()` on all output
-- Input sanitized via `sanitize_text_field()`, `sanitize_email()`, `esc_url_raw()`
+- Input sanitized via `sanitize_text_field()`, `sanitize_email()`, `esc_url_raw()`, `wp_unslash()`
+- CSV formula injection protection — values prefixed to prevent Excel formula execution
+- Honeypot field on all forms — silent bot discard, no user friction
 - REST API gated behind WordPress authentication
 
 ---
 
 ## Changelog
 
+### 2.8.0
+- New: `[dk_treatment_enquiry id="1"]` — pre-fills form with treatment name, auto-detects on treatment pages
+- New: Patient confirmation email — patients receive acknowledgement after submission
+- New: Honeypot spam protection on all forms — silent bot blocking
+- New: `[dk_call number="+44..." label="Call Us"]` click-to-call shortcode
+- New: `[dk_opening_hours]` shortcode with Settings → Opening Hours tab
+- New: Team member social links — LinkedIn, Instagram, Facebook, Twitter on team profiles
+- New: `[dk_map address="..."]` Google Maps embed shortcode
+- New: Per-form confirmation message — custom thank-you text per form
+
+### 2.7.0
+- Security: CSV formula injection fix — values starting with `=`, `+`, `-`, `@` are prefixed
+- Security: `wp_unslash()` added to all `$_POST` reads in SettingsController and PortfolioMeta
+- Fix: `mb_substr()` for multibyte-safe user agent string truncation
+
+### 2.6.0
+- New: Before/After image comparison slider for dental portfolio
+- New: `[dk_before_after]` shortcode — use post ID or direct attachment IDs
+- New: Drag-to-reveal slider with mouse and touch support
+- New: Before/After image meta box on Portfolio posts with WP media uploader
+- New: Gutenberg block for before/after slider under Dental Focus category
+
+### 2.5.0
+- New: Price field on Treatments post type — set price and price note from admin sidebar
+- New: Price displayed on treatment cards with bold value and small note
+
+### 2.4.0
+- New: `[dk_whatsapp]` click-to-chat shortcode with number, message, label, and style params
+- New: WhatsApp Gutenberg block under Dental Focus block category
+- New: Green WhatsApp button style with inline SVG icon
+
+### 2.3.0
+- New: GDPR consent checkbox on all forms — enable in Settings → General
+- New: Configurable consent label and privacy policy URL
+- New: Server-side validation blocks submission if consent not given
+- New: Consent field excluded from stored submission data
+
+### 2.2.0
+- New: Star ratings (1–5) on testimonials — set from admin meta box, displayed in gold on frontend
+- New: "No rating" option to keep testimonials without stars
+
+### 2.1.0
+- New: Gutenberg blocks for all shortcodes — use Dental Focus directly in the block editor
+- New: "Dental Focus" block category in block inserter
+- New: Live server-side preview for all blocks in editor
+- New: Form block with dynamic form dropdown fetched from REST API
+- New: CPT blocks (Testimonials, Team, Treatments, Portfolio, Banners) with Items, Columns, Category controls
+- New: Social Link and Social Links List blocks
+
 ### 2.0.0
-- Complete rewrite — PHP 8.0, WP 6.0 minimum, `DentalKit\` namespace, PSR-4 autoloading
+- Complete rewrite — PHP 8.0, WP 6.0 minimum, `DentalFocus\` namespace, PSR-4 autoloading
 - New: Drag-and-drop form builder with 8 field types
 - New: Submissions table with CSV export (UTF-8 BOM)
-- New: WP REST API (`dentalkit/v1/forms`)
+- New: WP REST API (`DentalFocus/v1/forms`)
 - New: CPT shortcodes with columns, limit, category support
 - New: Social media shortcodes `[dk_social]` and `[dk_social_list]`
 - New: Email notification on submission
