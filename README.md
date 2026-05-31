@@ -98,7 +98,7 @@ All saved forms in one table — Name, field count, submission count, auto-gener
 
 ### Submissions — Data Table
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-5.png" alt="Submissions management table" width="100%" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-6.png" alt="Submission detail view" width="100%" />
 </p>
 
 All patient form submissions in one view. Filter by form, export to CSV, or delete individual entries.
@@ -107,7 +107,7 @@ All patient form submissions in one view. Filter by form, export to CSV, or dele
 
 ### Submissions — Single Detail View
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-6.png" alt="Submission detail view" width="100%" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-7.png" alt="Settings panel" width="100%" />
 </p>
 
 Full submission data with field labels, values, timestamp, and IP address.
@@ -116,7 +116,7 @@ Full submission data with field labels, values, timestamp, and IP address.
 
 ### Settings — General, Social Media & Help
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-7.png" alt="Settings panel" width="100%" />
+  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-8.png" alt="Frontend form rendered by shortcode" width="100%" />
 </p>
 
 Three tabs — **General**: email notification toggle, notification email address, reCAPTCHA v3 site/secret keys. **Social Media**: manage social links. **Help & Guide**: usage reference.
@@ -125,7 +125,7 @@ Three tabs — **General**: email notification toggle, notification email addres
 
 ### Frontend Form
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-8.png" alt="Frontend form rendered by shortcode" width="100%" />
+    <img src="https://raw.githubusercontent.com/bhargav960143/dentalkit/master/assets/screenshot-5.png" alt="Submissions management table" width="100%" />
 </p>
 
 Frontend form rendered by `[dk_form id="1"]`. Fully responsive, accessible, AJAX submission with inline validation.
