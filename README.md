@@ -409,5 +409,24 @@ GPL-2.0-or-later — see [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html)
 
 ## Author
 
-**Trentium Team** — [trentiums.com](https://www.trentiums.com)
+<p>
+  <a href="https://www.linkedin.com/in/bhargavpateldeveloper/" title="Bhargav Patel">
+    <img src="https://avatars.githubusercontent.com/u/bhargav960143" width="60" height="60" style="border-radius:50%" alt="Bhargav Patel" />
+  </a>
+</p>
+
+**Bhargav Patel** — Full Stack WordPress Developer
+[LinkedIn](https://www.linkedin.com/in/bhargavpateldeveloper/) · [GitHub](https://github.com/bhargav960143) · [trentiums.com](https://www.trentiums.com/bhargav)
+
+---
+
+## Sponsor
+
+Support this project by becoming a sponsor.
+
+<a href="https://www.trentiums.com/" title="Trentium Solution">
+  <img src="https://www.trentiums.com/front/theme/assets/img/logo/logo.png" height="80" alt="Trentium Solution" />
+</a>
+
+**[Trentium Solution](https://www.trentiums.com/)** — Web & Mobile Development Company
 
