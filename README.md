@@ -5,14 +5,37 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-2.0.0-blue.svg" alt="Version 2.0.0" />
-  <img src="https://img.shields.io/badge/WordPress-%3E%3D6.0-21759b.svg" alt="WordPress 6.0+" />
-  <img src="https://img.shields.io/badge/PHP-%3E%3D8.0-8892bf.svg" alt="PHP 8.0+" />
-  <img src="https://img.shields.io/badge/license-GPL--2.0--or--later-green.svg" alt="License GPL-2.0-or-later" />
+  <img src="https://img.shields.io/badge/version-2.0.0-blue.svg?style=for-the-badge" alt="Version 2.0.0" />
+  <img src="https://img.shields.io/badge/WordPress-%3E%3D6.0-21759b.svg?style=for-the-badge&logo=wordpress" alt="WordPress 6.0+" />
+  <img src="https://img.shields.io/badge/PHP-%3E%3D8.0-8892bf.svg?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.0+" />
+  <img src="https://img.shields.io/badge/license-GPL--2.0--or--later-green.svg?style=for-the-badge" alt="License" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/stars/bhargav960143/dentalkit?style=for-the-badge&logo=github&color=yellow" alt="GitHub Stars" />
+  <img src="https://img.shields.io/github/forks/bhargav960143/dentalkit?style=for-the-badge&logo=github&color=orange" alt="GitHub Forks" />
+  <img src="https://img.shields.io/github/issues/bhargav960143/dentalkit?style=for-the-badge&logo=github&color=red" alt="GitHub Issues" />
+  <img src="https://img.shields.io/github/last-commit/bhargav960143/dentalkit?style=for-the-badge&logo=github&color=brightgreen" alt="Last Commit" />
 </p>
 
 <p align="center">
   Complete dental practice website toolkit — drag-and-drop form builder, custom post types, submissions management, CSV export, and social media management.
+</p>
+
+<br />
+
+<p align="center">
+  <a href="https://github.com/bhargav960143/dentalkit/archive/refs/heads/master.zip">
+    <img src="https://img.shields.io/badge/⬇%20Download%20Plugin-DentalKit%20v2.0.0-0073aa?style=for-the-badge&logo=wordpress&logoColor=white" alt="Download DentalKit v2.0.0" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/bhargav960143/dentalkit/issues">
+    <img src="https://img.shields.io/badge/🐛%20Report%20Bug-open%20issue-d63638?style=for-the-badge" alt="Report Bug" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/bhargav960143/dentalkit/issues">
+    <img src="https://img.shields.io/badge/✨%20Request%20Feature-open%20issue-00a32a?style=for-the-badge" alt="Request Feature" />
+  </a>
 </p>
 
 ---
@@ -410,13 +433,26 @@ GPL-2.0-or-later — see [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html)
 ## Author
 
 <p>
-  <a href="https://www.linkedin.com/in/bhargavpateldeveloper/" title="Bhargav Patel">
-    <img src="https://avatars.githubusercontent.com/u/bhargav960143" width="60" height="60" style="border-radius:50%" alt="Bhargav Patel" />
+  <a href="https://github.com/bhargav960143" title="Bhargav Patel">
+    <img src="https://github.com/bhargav960143.png" width="80" height="80" style="border-radius:50%" alt="Bhargav Patel" />
   </a>
 </p>
 
 **Bhargav Patel** — Full Stack WordPress Developer
-[LinkedIn](https://www.linkedin.com/in/bhargavpateldeveloper/) · [GitHub](https://github.com/bhargav960143) · [trentiums.com](https://www.trentiums.com/bhargav)
+
+<p>
+  <a href="https://www.linkedin.com/in/bhargavpateldeveloper/">
+    <img src="https://img.shields.io/badge/LinkedIn-Bhargav%20Patel-0077b5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/bhargav960143">
+    <img src="https://img.shields.io/badge/GitHub-bhargav960143-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  &nbsp;
+  <a href="https://www.trentiums.com/bhargav">
+    <img src="https://img.shields.io/badge/Website-trentiums.com-0073aa?style=flat-square&logo=wordpress&logoColor=white" alt="Website" />
+  </a>
+</p>
 
 ---
 
