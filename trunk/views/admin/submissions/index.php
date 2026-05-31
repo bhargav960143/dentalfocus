@@ -85,7 +85,7 @@ $export_url   = $form_id
 				<td><?php echo esc_html( $form_label ); ?></td>
 				<td class="dk-data-preview"><?php echo implode( ' &bull; ', $preview ); ?></td>
 				<td><?php echo esc_html( $sub['ip_address'] ?? '' ); ?></td>
-				<td><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $sub['created_at'] ) ) ); ?></td>
+				<td><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $sub['created_at'] . ' UTC' ) ) ); ?></td>
 				<td>
 					<a href="<?php echo esc_url( $view_url ); ?>" class="button button-small"><?php esc_html_e( 'View', 'dentalkit' ); ?></a>
 					<a href="<?php echo esc_url( $delete_url ); ?>" class="button button-small dk-btn-danger"

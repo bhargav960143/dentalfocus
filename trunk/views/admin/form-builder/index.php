@@ -71,7 +71,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 						<?php echo esc_html( $shortcode ); ?>
 					</code>
 				</td>
-				<td><?php echo esc_html( wp_date( get_option( 'date_format' ), strtotime( $form['created_at'] ) ) ); ?></td>
+				<td><?php echo esc_html( wp_date( get_option( 'date_format' ), strtotime( $form['created_at'] . ' UTC' ) ) ); ?></td>
 				<td>
 					<a href="<?php echo esc_url( $edit_url ); ?>" class="button button-small">
 						<?php esc_html_e( 'Edit', 'dentalkit' ); ?>

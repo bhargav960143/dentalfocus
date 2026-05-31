@@ -149,9 +149,12 @@ $field_types = FieldRegistry::all();
 </div>
 
 <script>
-window.DKBuilderData = <?php echo wp_json_encode( [
-	'form_id'  => $form_id,
-	'fields'   => $fields,
-	'is_edit'  => $is_edit,
-] ); ?>;
+window.DKBuilderData = <?php echo wp_json_encode(
+	[
+		'form_id'  => $form_id,
+		'fields'   => $fields,
+		'is_edit'  => $is_edit,
+	],
+	JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+); ?>;
 </script>

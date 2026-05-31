@@ -45,7 +45,7 @@ $delete_url = wp_nonce_url(
 				</tr>
 				<tr>
 					<th><?php esc_html_e( 'Date', 'dentalkit' ); ?></th>
-					<td><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $submission['created_at'] ) ) ); ?></td>
+					<td><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $submission['created_at'] . ' UTC' ) ) ); ?></td>
 				</tr>
 				<tr>
 					<th><?php esc_html_e( 'IP Address', 'dentalkit' ); ?></th>

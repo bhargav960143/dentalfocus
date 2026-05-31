@@ -17,9 +17,11 @@ class SelectField extends AbstractField {
 
 		$opts_html = '<option value="">' . esc_html__( '— Select —', 'dentalkit' ) . '</option>';
 		foreach ( $options as $opt ) {
-			$opt       = esc_html( trim( (string) $opt ) );
-			$selected  = selected( $value, $opt, false );
-			$opts_html .= "<option value=\"{$opt}\"{$selected}>{$opt}</option>";
+			$opt_clean = trim( (string) $opt );
+			$opt_attr  = esc_attr( $opt_clean );
+			$opt_html  = esc_html( $opt_clean );
+			$selected  = selected( $value, $opt_clean, false );
+			$opts_html .= "<option value=\"{$opt_attr}\"{$selected}>{$opt_html}</option>";
 		}
 
 		$input = sprintf(

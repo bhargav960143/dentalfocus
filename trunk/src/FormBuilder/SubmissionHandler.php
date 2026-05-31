@@ -56,12 +56,17 @@ class SubmissionHandler {
 			wp_send_json_error( [ 'errors' => $errors ], 422 );
 		}
 
+		$user_agent = sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ?? '' ) );
+		if ( strlen( $user_agent ) > 512 ) {
+			$user_agent = substr( $user_agent, 0, 512 );
+		}
+
 		$submission_repo = new SubmissionRepository();
 		$submission_id   = $submission_repo->create(
 			$form_id,
 			$data,
 			$this->get_client_ip(),
-			sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ?? '' ) )
+			$user_agent
 		);
 
 		$this->maybe_send_notification( $form, $data );
@@ -73,14 +78,41 @@ class SubmissionHandler {
 	}
 
 	private function get_client_ip(): string {
-		$keys = [ 'HTTP_CF_CONNECTING_IP', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR' ];
-		foreach ( $keys as $key ) {
-			if ( ! empty( $_SERVER[ $key ] ) ) {
-				$ip = sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) );
-				return explode( ',', $ip )[0];
+		$ip = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) );
+
+		// Only trust forwarded headers if REMOTE_ADDR is a known private/proxy range
+		if ( $this->is_trusted_proxy( $ip ) ) {
+			foreach ( [ 'HTTP_CF_CONNECTING_IP', 'HTTP_X_FORWARDED_FOR' ] as $key ) {
+				if ( ! empty( $_SERVER[ $key ] ) ) {
+					$forwarded = sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) );
+					$candidate = trim( explode( ',', $forwarded )[0] );
+					if ( filter_var( $candidate, FILTER_VALIDATE_IP ) ) {
+						return $candidate;
+					}
+				}
 			}
 		}
-		return '';
+
+		return filter_var( $ip, FILTER_VALIDATE_IP ) ? $ip : '';
+	}
+
+	private function is_trusted_proxy( string $ip ): bool {
+		$private_ranges = [
+			'10.0.0.0/8',
+			'172.16.0.0/12',
+			'192.168.0.0/16',
+			'127.0.0.0/8',
+		];
+		foreach ( $private_ranges as $range ) {
+			[ $subnet, $bits ] = explode( '/', $range );
+			$ip_long     = ip2long( $ip );
+			$subnet_long = ip2long( $subnet );
+			$mask        = -1 << ( 32 - (int) $bits );
+			if ( ( $ip_long & $mask ) === ( $subnet_long & $mask ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private function maybe_send_notification( array $form, array $data ): void {

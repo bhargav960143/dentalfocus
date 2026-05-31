@@ -259,7 +259,10 @@
 			setStatus( DK.i18n.save_success, 'success' );
 
 			if ( ! is_edit && json.id ) {
-				window.location.href = DK.admin_url + '?page=dk-forms&action=edit&id=' + json.id + '&saved=1';
+				const newId = parseInt( json.id, 10 );
+				if ( newId > 0 ) {
+					window.location.href = DK.admin_url + '?page=dk-forms&action=edit&id=' + newId + '&saved=1';
+				}
 			}
 		} catch ( err ) {
 			setStatus( err.message || DK.i18n.save_error, 'error' );
