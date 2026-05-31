@@ -46,7 +46,8 @@ class Shortcode {
 						$type    = $field['type'] ?? 'text';
 						$handler = FieldRegistry::get( $type );
 						if ( $handler ) {
-							echo wp_kses_post( $handler->render( $field ) );
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- render() escapes all output internally via esc_attr/esc_html/esc_textarea
+							echo $handler->render( $field );
 						}
 					endforeach; ?>
 				</div>

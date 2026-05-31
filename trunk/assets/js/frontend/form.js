@@ -11,110 +11,159 @@
 		const nonce   = $form.data( 'nonce' );
 		const $submit = $form.find( '.dk-submit-btn' );
 
+		$submit.data( 'original-text', $submit.text() );
+
 		$form.on( 'submit', function ( e ) {
 			e.preventDefault();
 
 			clearErrors( $form );
+			$msg.hide().removeClass( 'dk-success dk-error' );
 
-			if ( ! validateForm( $form ) ) return;
+			if ( ! validateForm( $form ) ) {
+				return;
+			}
 
-			const $fields = $form.find( '[name^="dk_fields"]' );
-			const data    = { action: 'dk_submit_form', form_id: formId, _nonce: nonce };
+			// Build POST data
+			const postData = {
+				action:  'dk_submit_form',
+				form_id: formId,
+				_nonce:  nonce,
+			};
 
-			$fields.each( function () {
-				const name = $( this ).attr( 'name' );
-				const type = $( this ).attr( 'type' );
+			// Collect all field values
+			$form.find( '.dk-field' ).each( function () {
+				const $field  = $( this );
+				const fieldId = $field.data( 'field-id' );
+				if ( ! fieldId ) return;
 
-				if ( type === 'checkbox' || type === 'radio' ) {
-					if ( $( this ).is( ':checked' ) ) {
-						const key = name.replace( 'dk_fields[', '' ).replace( '][]', '' ).replace( ']', '' );
-						if ( ! data[ 'dk_fields[' + key + '][]' ] ) {
-							data[ 'dk_fields[' + key + '][]' ] = [];
-						}
-						data[ 'dk_fields[' + key + '][]' ].push( $( this ).val() );
-					}
+				const $inputs = $field.find( 'input, select, textarea' );
+				const type    = $inputs.first().attr( 'type' );
+
+				if ( type === 'checkbox' ) {
+					const vals = [];
+					$field.find( 'input[type="checkbox"]:checked' ).each( function () {
+						vals.push( $( this ).val() );
+					} );
+					postData[ 'dk_fields[' + fieldId + ']' ] = vals;
+				} else if ( type === 'radio' ) {
+					postData[ 'dk_fields[' + fieldId + ']' ] = $field.find( 'input[type="radio"]:checked' ).val() || '';
 				} else {
-					data[ name ] = $( this ).val();
+					postData[ 'dk_fields[' + fieldId + ']' ] = $inputs.first().val() || '';
 				}
 			} );
 
 			$submit.prop( 'disabled', true ).text( DKForm.i18n.submitting );
-			$msg.hide().removeClass( 'dk-success dk-error' );
 
-			$.post( DKForm.ajax_url, data, function ( response ) {
-				if ( response.success ) {
-					$msg.addClass( 'dk-success' ).text( response.data.message ).show();
-					$form.find( '.dk-form-fields' ).slideUp( 300 );
-					$submit.hide();
-				} else {
-					if ( response.data && response.data.errors ) {
-						showErrors( $form, response.data.errors );
-					}
-					$msg.addClass( 'dk-error' ).text(
-						response.data && response.data.message
+			$.ajax( {
+				url:      DKForm.ajax_url,
+				type:     'POST',
+				data:     postData,
+				success: function ( response ) {
+					if ( response.success ) {
+						$msg.addClass( 'dk-success' )
+							.text( response.data.message || DKForm.i18n.submit_success )
+							.show();
+						$form.find( '.dk-form-fields, .dk-form-footer' ).slideUp( 300 );
+					} else {
+						if ( response.data && response.data.errors ) {
+							showServerErrors( $form, response.data.errors );
+						}
+						const errMsg = ( response.data && response.data.message )
 							? response.data.message
-							: DKForm.i18n.submit_error
-					).show();
-					$submit.prop( 'disabled', false ).text( $submit.data( 'original-text' ) || 'Send Message' );
-				}
-			} ).fail( function () {
-				$msg.addClass( 'dk-error' ).text( DKForm.i18n.submit_error ).show();
-				$submit.prop( 'disabled', false );
+							: DKForm.i18n.submit_error;
+						$msg.addClass( 'dk-error' ).text( errMsg ).show();
+						$submit.prop( 'disabled', false ).text( $submit.data( 'original-text' ) );
+					}
+				},
+				error: function () {
+					$msg.addClass( 'dk-error' ).text( DKForm.i18n.submit_error ).show();
+					$submit.prop( 'disabled', false ).text( $submit.data( 'original-text' ) );
+				},
 			} );
 		} );
 
-		$submit.data( 'original-text', $submit.text() );
+		// Clear field error on input
+		$form.on( 'input change', 'input, select, textarea', function () {
+			$( this ).removeClass( 'dk-error' );
+			const $fieldWrap = $( this ).closest( '.dk-field' );
+			$fieldWrap.find( '.dk-field-error' ).remove();
+		} );
 	} );
 
+	// ── Validation ────────────────────────────────────────────────────────────
 	function validateForm( $form ) {
 		let valid = true;
 
-		$form.find( '[required]' ).each( function () {
-			const $el  = $( this );
-			const type = $el.attr( 'type' );
+		$form.find( '.dk-field' ).each( function () {
+			const $fieldWrap = $( this );
+			const fieldId    = $fieldWrap.data( 'field-id' );
+			const isRequired = $fieldWrap.attr( 'aria-required' ) === 'true';
 
-			let value = $el.val();
+			if ( ! fieldId ) return;
+
+			const $inputs = $fieldWrap.find( 'input, select, textarea' );
+			const type    = $inputs.first().attr( 'type' );
+
 			if ( type === 'checkbox' ) {
-				const name = $el.attr( 'name' );
-				if ( $form.find( '[name="' + name + '"]:checked' ).length === 0 ) {
-					showFieldError( $el.closest( '.dk-field' ), DKForm.i18n.required );
+				if ( isRequired && $fieldWrap.find( 'input:checked' ).length === 0 ) {
+					showFieldError( $fieldWrap, DKForm.i18n.required );
 					valid = false;
 				}
 				return;
 			}
 
-			if ( ! value || ! value.trim() ) {
-				showFieldError( $el.closest( '.dk-field' ), DKForm.i18n.required );
-				$el.addClass( 'dk-error' );
+			if ( type === 'radio' ) {
+				if ( isRequired && $fieldWrap.find( 'input:checked' ).length === 0 ) {
+					showFieldError( $fieldWrap, DKForm.i18n.required );
+					valid = false;
+				}
+				return;
+			}
+
+			const $input = $inputs.first();
+			const val    = ( $input.val() || '' ).trim();
+
+			if ( isRequired && val === '' ) {
+				showFieldError( $fieldWrap, DKForm.i18n.required );
+				$input.addClass( 'dk-error' );
 				valid = false;
 				return;
 			}
 
-			if ( type === 'email' && ! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test( value ) ) {
-				showFieldError( $el.closest( '.dk-field' ), DKForm.i18n.invalid_email );
-				$el.addClass( 'dk-error' );
-				valid = false;
-			}
+			if ( val !== '' ) {
+				if ( type === 'email' && ! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test( val ) ) {
+					showFieldError( $fieldWrap, DKForm.i18n.invalid_email );
+					$input.addClass( 'dk-error' );
+					valid = false;
+					return;
+				}
 
-			if ( type === 'tel' && value && ! /^[0-9+\-\(\)\s]{7,}$/.test( value ) ) {
-				showFieldError( $el.closest( '.dk-field' ), DKForm.i18n.invalid_phone );
-				$el.addClass( 'dk-error' );
-				valid = false;
+				if ( type === 'tel' && ! /^[0-9+\-\(\)\s]{7,20}$/.test( val ) ) {
+					showFieldError( $fieldWrap, DKForm.i18n.invalid_phone );
+					$input.addClass( 'dk-error' );
+					valid = false;
+					return;
+				}
 			}
 		} );
 
 		return valid;
 	}
 
-	function showFieldError( $field, msg ) {
-		$field.find( '.dk-field-error' ).remove();
-		$field.append( '<span class="dk-field-error" role="alert">' + escHtml( msg ) + '</span>' );
+	function showFieldError( $fieldWrap, msg ) {
+		$fieldWrap.find( '.dk-field-error' ).remove();
+		$fieldWrap.append(
+			'<span class="dk-field-error" role="alert">' + escHtml( msg ) + '</span>'
+		);
 	}
 
-	function showErrors( $form, errors ) {
-		Object.entries( errors ).forEach( ( [ fieldId, msg ] ) => {
-			const $field = $form.find( '[data-field-id="' + fieldId + '"]' );
-			if ( $field.length ) showFieldError( $field, msg );
+	function showServerErrors( $form, errors ) {
+		$.each( errors, function ( fieldId, msg ) {
+			const $fieldWrap = $form.find( '[data-field-id="' + fieldId + '"]' );
+			if ( $fieldWrap.length ) {
+				showFieldError( $fieldWrap, msg );
+				$fieldWrap.find( 'input, select, textarea' ).first().addClass( 'dk-error' );
+			}
 		} );
 	}
 
